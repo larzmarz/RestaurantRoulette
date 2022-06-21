@@ -7,19 +7,6 @@
     tools:context=".SignUpActivity">
 
     <EditText
-        android:id="@+id/etFullName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="24dp"
-        android:ems="10"
-        android:hint="Full Name"
-        android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/etUsernameSU"
-        app:layout_constraintEnd_toEndOf="@+id/etUsernameSU"
-        app:layout_constraintHorizontal_bias="0.527"
-        app:layout_constraintStart_toStartOf="@+id/etUsernameSU" />
-
-    <EditText
         android:id="@+id/etUsernameSU"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -40,30 +27,16 @@
         android:hint="Password"
         android:inputType="textPassword"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/etEmailSU"
-        app:layout_constraintStart_toStartOf="@+id/etEmailSU"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
-        android:id="@+id/etEmailSU"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:ems="10"
-        android:hint="Email"
-        android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etPasswordSU" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="101dp" />
 
     <Button
         android:id="@+id/btSignupSU"
         android:layout_width="147dp"
         android:layout_height="40dp"
-        android:layout_marginTop="45dp"
         android:text="SIGNUP"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etEmailSU" />
+        tools:layout_editor_absoluteY="490dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
