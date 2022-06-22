@@ -29,6 +29,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
             @Override
             public void onClick(View v) {
                 Toast.makeText(getContext(), "button works", Toast.LENGTH_SHORT).show();
+                goSearchPage();
             }
         });
         return view;
