@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.example.restaurantroulette.R;
 import com.example.restaurantroulette.SearchPageActivity;
@@ -19,25 +20,21 @@ import com.example.restaurantroulette.SearchPageActivity;
 public class HomeFragment extends Fragment implements View.OnClickListener{
     public Button btStart;
     View view;
-//    @Override
-//    public void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//    }
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false);
+        view = inflater.inflate(R.layout.fragment_home, container, false);
+        btStart = view.findViewById(R.id.btStartSearch);
+        btStart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getContext(), "button works", Toast.LENGTH_SHORT).show();
+            }
+        });
+        return view;
     }
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstances) {
         super.onViewCreated(view, savedInstances);
-//        btStart.findViewById(R.id.btStartSearch);
-//        btStart.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                goSearchPage();
-//            }
-//        });
     }
     private void goSearchPage() {
         Intent i = new Intent(getActivity(), SearchPageActivity.class);
