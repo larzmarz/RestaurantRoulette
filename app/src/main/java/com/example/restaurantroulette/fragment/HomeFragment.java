@@ -28,7 +28,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
         btStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getContext(), "button works", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "redirect successful", Toast.LENGTH_SHORT).show();
                 goSearchPage();
             }
         });
@@ -41,6 +41,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
         Intent i = new Intent(getActivity(), SearchPageActivity.class);
         startActivity(i);
     }
+    //empty method for implementation of view.onclicklistener
     @Override
     public void onClick(View v) {
 

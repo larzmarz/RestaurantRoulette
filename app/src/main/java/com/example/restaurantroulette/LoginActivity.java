@@ -38,26 +38,10 @@ public class LoginActivity extends AppCompatActivity {
                 loginUser(username, password);
             }
         });
-        //activate signup button
         btSignup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!etUsername.getText().toString().isEmpty() && !etPassword.getText().toString().isEmpty()){
-                    ParseUser user = new ParseUser();
-                    user.setUsername(etUsername.getText().toString());
-                    user.setPassword(etPassword.getText().toString());
-                    user.signUpInBackground(new SignUpCallback() {
-                        @Override
-                        public void done(ParseException e) {
-                            if(e == null){
-                                Toast.makeText(LoginActivity.this, "SignupSuccessful!", Toast.LENGTH_SHORT).show();
-                                goMainActivity();
-                            }else{
-                                Toast.makeText(LoginActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                    });
-                }
+                goSignupActivity();
             }
         });
     }

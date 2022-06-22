@@ -26,11 +26,11 @@ public class SearchPageActivity extends AppCompatActivity {
         setContentView(R.layout.activity_search_page);
         AsyncHttpClient client = new AsyncHttpClient();
         RequestHeaders headers = new RequestHeaders();
+        //TODO: Hide API Key
         headers.put("Authorization", "Bearer 9r3kos1OAvsDBYAPSPskzt-Yu6qIbcaVsBIAS_BznnDOEoTesIHTU_hoojwl4yih23D0K0RNfdnALn24KdyquMsFiuv12mWiI2ag7zVVRhBMRdmQBWWeNzoKrjayYnYx");
         client.get(BUSINESS_INFO + "?location=10018", headers, null, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Headers headers, JSON json){
-                Log.i("test", "");
                 try {
                     JSONObject business = json.jsonObject.getJSONArray("businesses").getJSONObject(0);
                 } catch (JSONException e) {

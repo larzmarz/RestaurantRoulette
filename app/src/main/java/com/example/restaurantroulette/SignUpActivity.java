@@ -19,46 +19,50 @@ public class SignUpActivity extends AppCompatActivity {
     public static final String TAG = "SignupActivity";
     public EditText etUsernameSU;
     public EditText etPasswordSU;
-    public EditText etEmailSU;
-    public EditText etFullName;
+    public EditText etFullNameSU;
+    public EditText etPwdRetypeSU;
     public Button btSignupSU;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
-        etUsernameSU = findViewById(R.id.etUsername);
-        etPasswordSU = findViewById(R.id.etPassword);
-        //etEmailSU = findViewById(R.id.etEmailSU);
-        //etFullName = findViewById(R.id.etFullName);
-        //btLoginSU = findViewById(R.id.btLogin);
-        btSignupSU = findViewById(R.id.btSignup);
+        etUsernameSU = findViewById(R.id.etUsernameSU);
+        etPasswordSU = findViewById(R.id.etPasswordSU);
+        etFullNameSU = findViewById(R.id.etFullNameSU);
+        etPwdRetypeSU = findViewById(R.id.etPwdRetypeSU);
+        btSignupSU = findViewById(R.id.btSignupSU);
+        //signs user up
         btSignupSU.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                    Log.i(TAG, "onClick signup button");
-                    String username = etUsernameSU.getText().toString();
-                    String password = etPasswordSU.getText().toString();
-                    signupUser(username, password);
-            }
-        });
-    }
-    private void signupUser(String username, String password) {
-        Log.i(TAG, "Attempting to signup user" + username);
-        ParseUser user = new ParseUser();
-        user.setUsername(username);
-        user.setPassword(password);
-
-        user.signUpInBackground(new SignUpCallback() {
-            @Override
-            public void done(ParseException e) {
-                if (e != null) {
-                    Log.e(TAG, "Issue with signup", e);
-                    Toast.makeText(SignUpActivity.this, "Issue with Signup: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                    return;
+                //if all the fields are filled out
+                if(!etUsernameSU.getText().toString().isEmpty() && !etPasswordSU.getText().toString().isEmpty() && !etFullNameSU.getText().toString().isEmpty() && !etPwdRetypeSU.getText().toString().isEmpty()){
+                    //if the passwords match
+                    if(etPasswordSU.getText().toString().equals(etPwdRetypeSU.getText().toString())){
+                        ParseUser user = new ParseUser();
+                        user.setUsername(etUsernameSU.getText().toString());
+                        user.setPassword(etPasswordSU.getText().toString());
+                        //TODO: save the full names to the backend
+                        user.signUpInBackground(new SignUpCallback() {
+                            @Override
+                            public void done(ParseException e) {
+                                if (e == null) {
+                                    Toast.makeText(SignUpActivity.this, "SignupSuccessful!", Toast.LENGTH_SHORT).show();
+                                    goMainActivity();
+                                } else {
+                                    Toast.makeText(SignUpActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        });
+                    //if the passwords don't match
+                    }else{
+                        Toast.makeText(SignUpActivity.this, "Passwords do not match!", Toast.LENGTH_SHORT).show();
+                    }
+                //if any field is empty
+                }else{
+                    Toast.makeText(SignUpActivity.this, "Fill out all fields", Toast.LENGTH_SHORT).show();
                 }
-                goMainActivity();
-                Toast.makeText(SignUpActivity.this, "Signup Success", Toast.LENGTH_SHORT).show();
             }
         });
     }

@@ -5,19 +5,22 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/tempbackgroundsearch"
     tools:context=".fragment.HomeFragment">
-    <Button
+
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btStartSearch"
-        android:layout_width="203dp"
-        android:layout_height="40dp"
+        android:layout_width="234dp"
+        android:layout_height="65dp"
         android:layout_marginStart="161dp"
         android:layout_marginEnd="156dp"
+        android:backgroundTint="#39423F3F"
         android:text="Start your search"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.522"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.52" />
+        app:layout_constraintVertical_bias="0.474" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
