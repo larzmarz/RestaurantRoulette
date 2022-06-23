@@ -16,7 +16,6 @@ import android.widget.Toast;
 import com.example.restaurantroulette.R;
 import com.example.restaurantroulette.SearchPageActivity;
 
-
 public class HomeFragment extends Fragment implements View.OnClickListener{
     public Button btStart;
     View view;
@@ -25,6 +24,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_home, container, false);
         btStart = view.findViewById(R.id.btStartSearch);
+        //when the user clicks the start button
         btStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -37,13 +37,12 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstances) {
         super.onViewCreated(view, savedInstances);
     }
+    //redirects user to page where they will search for a restaurant
     private void goSearchPage() {
         Intent i = new Intent(getActivity(), SearchPageActivity.class);
         startActivity(i);
     }
     //empty method for implementation of view.onclicklistener
     @Override
-    public void onClick(View v) {
-
-    }
+    public void onClick(View v) {}
 }

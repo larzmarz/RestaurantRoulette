@@ -27,6 +27,7 @@ public class UserFragment extends Fragment implements View.OnClickListener{
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_user, container, false);
         btLogout = view.findViewById(R.id.btLogout);
+        //when the user clicks the logout button
         btLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -36,20 +37,19 @@ public class UserFragment extends Fragment implements View.OnClickListener{
         });
         return view;
     }
-
     private void onLogout() {
         //logout of account
         ParseUser.logOut();
         ParseUser currentUser =ParseUser.getCurrentUser();
+        //redirect to login page
         Intent i = new Intent(getContext(), LoginActivity.class);
         startActivity(i);
     }
-
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstances) {
         super.onViewCreated(view, savedInstances);
     }
+    //empty Onclick for onclicklistener implementation
     @Override
     public void onClick(View v) {
-
     }
 }

@@ -66,6 +66,7 @@ public class SignUpActivity extends AppCompatActivity {
             }
         });
     }
+    //redirect user to main page once authenticated and signed up
     private void goMainActivity() {
         Intent i = new Intent(SignUpActivity.this, MainActivity.class);
         startActivity(i);

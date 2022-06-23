@@ -8,7 +8,7 @@ public class ParseApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-
+        //connecting backend data collection app
         Parse.initialize(new Parse.Configuration.Builder(this)
                 .applicationId("JuEszvWCLncywS7ocP59OXIwZH0qq5OHBwaKLVJf")
                 .clientKey("e9eUIyxdCZkKHsPbb2XMeH2Pth4rL6OomfzYDyfM")

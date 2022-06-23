@@ -33,11 +33,13 @@ public class LoginActivity extends AppCompatActivity {
         btLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //sets the users inputs as username and password values that will be passed to login method
                 String username = etUsername.getText().toString();
                 String password = etPassword.getText().toString();
                 loginUser(username, password);
             }
         });
+        //if user clicks signup button
         btSignup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

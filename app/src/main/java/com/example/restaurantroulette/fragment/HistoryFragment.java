@@ -24,12 +24,12 @@ public class HistoryFragment extends Fragment {
     }
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstances) {
         super.onViewCreated(view, savedInstances);
+        //TODO: implement swipe refresh for the page with the restaurants the user has been to
         swipeContainer = view.findViewById(R.id.swipeContainer);
         swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
-            public void onRefresh() {
-
-            }
+            //refresh implementation
+            public void onRefresh() {}
         });
     }
 }
