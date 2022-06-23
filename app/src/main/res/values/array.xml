@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name = "food_items">
+        <item>Select from below</item>
+        <item>Japanese-example</item>
+        <item>American-example</item>
+        <item>Colombian-example</item>
+    </string-array>
+    <string-array name = "price_range">
+        <item>Select from below</item>
+        <item>$</item>
+        <item>$$</item>
+        <item>$$$</item>
+    </string-array>
+    <string-array name = "mile_radius">
+        <item>Select from below</item>
+        <item>1</item>
+        <item>5</item>
+        <item>10</item>
+        <item>20</item>
+    </string-array>
+</resources>

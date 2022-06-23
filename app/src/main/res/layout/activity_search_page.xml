@@ -59,7 +59,7 @@
         app:layout_constraintTop_toBottomOf="@+id/tvPriceRange" />
 
     <Spinner
-        android:id="@+id/spPriceRange2"
+        android:id="@+id/spMileRadius"
         android:layout_width="361dp"
         android:layout_height="34dp"
         android:layout_marginTop="4dp"
@@ -67,4 +67,15 @@
         app:layout_constraintHorizontal_bias="0.76"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvPriceRange2" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btRandomize"
+        android:layout_width="171dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="148dp"
+        android:text="randomize"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/spMileRadius"
+        app:layout_constraintHorizontal_bias="0.431"
+        app:layout_constraintStart_toStartOf="@+id/spMileRadius" />
 </androidx.constraintlayout.widget.ConstraintLayout>

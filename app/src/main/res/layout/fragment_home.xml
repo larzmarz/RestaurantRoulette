@@ -24,4 +24,17 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.474" />
 
+    <EditText
+        android:id="@+id/etZipCode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="32dp"
+        android:ems="10"
+        android:hint="Zip Code"
+        android:inputType="textPersonName"
+        android:textColor="#040404"
+        app:layout_constraintBottom_toTopOf="@+id/btStartSearch"
+        app:layout_constraintEnd_toEndOf="@+id/btStartSearch"
+        app:layout_constraintStart_toStartOf="@+id/btStartSearch" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
