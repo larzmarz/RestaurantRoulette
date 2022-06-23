@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/veggiespic"
     tools:context=".SignUpActivity">
 
     <EditText
@@ -14,6 +15,8 @@
         android:ems="10"
         android:hint="Username..."
         android:inputType="textPersonName"
+        android:textColor="#CCFFFFFF"
+        android:textColorHint="#BFFFFFFF"
         app:layout_constraintBottom_toTopOf="@+id/etPasswordSU"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
@@ -27,6 +30,8 @@
         android:ems="10"
         android:hint="Password..."
         android:inputType="textPassword"
+        android:textColor="#CCFFFFFF"
+        android:textColorHint="#BFFFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
@@ -41,7 +46,9 @@
         android:layout_marginBottom="24dp"
         android:ems="10"
         android:hint="Full Name..."
-        android:inputType="textPassword"
+        android:inputType="textPersonName"
+        android:textColor="#CCFFFFFF"
+        android:textColorHint="#BFFFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
@@ -57,6 +64,8 @@
         android:ems="10"
         android:hint="Retype Password..."
         android:inputType="textPassword"
+        android:textColor="#CCFFFFFF"
+        android:textColorHint="#BFFFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
@@ -64,11 +73,12 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.587" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btSignupSU"
         android:layout_width="147dp"
         android:layout_height="40dp"
         android:layout_marginTop="144dp"
+        android:backgroundTint="#73FFFFFF"
         android:text="SIGNUP"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

@@ -14,6 +14,7 @@
         android:layout_height="65dp"
         android:layout_marginStart="161dp"
         android:layout_marginEnd="156dp"
+        android:background="#73FFFFFF"
         android:backgroundTint="#39423F3F"
         android:text="Start your search"
         app:layout_constraintBottom_toBottomOf="parent"

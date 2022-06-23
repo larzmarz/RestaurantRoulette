@@ -4,6 +4,8 @@ import static com.facebook.stetho.inspector.network.PrettyPrinterDisplayType.JSO
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Spinner;
+
 import com.codepath.asynchttpclient.AsyncHttpClient;
 import com.codepath.asynchttpclient.RequestHeaders;
 import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler;
@@ -11,6 +13,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import okhttp3.Headers;
 public class SearchPageActivity extends AppCompatActivity {
+    private Spinner spTypeFood;
+    private Spinner spPriceRange;
+    private Spinner spLocation;
     //redirect to the specific api request I need
     public static final String BUSINESS_INFO = "https://api.yelp.com/v3/businesses/search";
     @Override
@@ -23,11 +28,11 @@ public class SearchPageActivity extends AppCompatActivity {
         headers.put("Authorization", "Bearer 9r3kos1OAvsDBYAPSPskzt-Yu6qIbcaVsBIAS_BznnDOEoTesIHTU_hoojwl4yih23D0K0RNfdnALn24KdyquMsFiuv12mWiI2ag7zVVRhBMRdmQBWWeNzoKrjayYnYx");
         //whatever follows the "?location=" is the user's location
         //debugger shows what happens in action and the data collected by the API
-        client.get(BUSINESS_INFO + "?location=10018", headers, null, new JsonHttpResponseHandler() {
+        client.get(BUSINESS_INFO + "?location=33176", headers, null, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Headers headers, JSON json){
                 try {
-                    //for testing reasons, displays first restaurant
+                    //for testing reasons, gets first restaurant
                     JSONObject business = json.jsonObject.getJSONArray("businesses").getJSONObject(0);
                 } catch (JSONException e) {
                     e.printStackTrace();
