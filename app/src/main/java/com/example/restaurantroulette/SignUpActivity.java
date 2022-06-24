@@ -50,7 +50,7 @@ public class SignUpActivity extends AppCompatActivity {
                                 if (e == null) {
                                     Toast.makeText(SignUpActivity.this, "SignupSuccessful!", Toast.LENGTH_SHORT).show();
                                     goMainActivity();
-                                } else {
+                                }else {
                                     Toast.makeText(SignUpActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                                 }
                             }

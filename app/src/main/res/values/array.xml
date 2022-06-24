@@ -19,4 +19,14 @@
         <item>10</item>
         <item>20</item>
     </string-array>
+    <string-array name = "rating">
+        <item>Select from below</item>
+        <item>Any</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+    </string-array>
+
+
+
 </resources>

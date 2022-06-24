@@ -8,6 +8,17 @@
     tools:context=".SearchPageActivity">
 
     <TextView
+        android:id="@+id/tvRating"
+        android:layout_width="254dp"
+        android:layout_height="38dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="152dp"
+        android:text="Rating Preferences:"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="@+id/tvPriceRange"
+        app:layout_constraintTop_toBottomOf="@+id/spPriceRange" />
+
+    <TextView
         android:id="@+id/tvTypeFood"
         android:layout_width="145dp"
         android:layout_height="35dp"
@@ -42,7 +53,7 @@
         android:id="@+id/spTypeFood"
         android:layout_width="361dp"
         android:layout_height="34dp"
-        android:layout_marginTop="164dp"
+        android:layout_marginTop="132dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.68"
         app:layout_constraintStart_toStartOf="parent"
@@ -64,18 +75,28 @@
         android:layout_height="34dp"
         android:layout_marginTop="4dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.76"
+        app:layout_constraintHorizontal_bias="0.68"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvPriceRange2" />
+
+    <Spinner
+        android:id="@+id/spRating"
+        android:layout_width="361dp"
+        android:layout_height="34dp"
+        android:layout_marginTop="4dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.76"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvRating" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btRandomize"
         android:layout_width="171dp"
         android:layout_height="50dp"
-        android:layout_marginBottom="148dp"
+        android:layout_marginBottom="116dp"
         android:text="randomize"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/spMileRadius"
-        app:layout_constraintHorizontal_bias="0.431"
+        app:layout_constraintHorizontal_bias="0.452"
         app:layout_constraintStart_toStartOf="@+id/spMileRadius" />
 </androidx.constraintlayout.widget.ConstraintLayout>
