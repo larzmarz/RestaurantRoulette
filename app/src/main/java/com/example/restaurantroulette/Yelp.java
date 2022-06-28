@@ -7,15 +7,14 @@ import org.parceler.Parcel;
 
 @Parcel
 public class Yelp {
-
-    String locationZip;
-    String locationAddress1;
-    String locationAddress2;
-    String locationAddress3;
-    String name;
-    String price;
-    Double rating;
-    String alias;
+    public String locationZip;
+    public String locationAddress1;
+    public String locationAddress2;
+    public String locationAddress3;
+    public String name;
+    public String price;
+    public Double rating;
+    public String alias;
 
     //empty for Parcel
     public Yelp(){

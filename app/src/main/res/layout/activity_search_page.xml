@@ -19,45 +19,26 @@
         app:layout_constraintTop_toBottomOf="@+id/spPriceRange" />
 
     <TextView
-        android:id="@+id/tvTypeFood"
-        android:layout_width="145dp"
-        android:layout_height="35dp"
-        android:layout_marginBottom="4dp"
-        android:text="Type of food:"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/spTypeFood"
-        app:layout_constraintStart_toStartOf="@+id/spTypeFood" />
-
-    <TextView
         android:id="@+id/tvPriceRange"
         android:layout_width="145dp"
         android:layout_height="35dp"
-        android:layout_marginTop="48dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="160dp"
         android:text="Price Range:"
         android:textSize="24sp"
         app:layout_constraintStart_toStartOf="@+id/spPriceRange"
-        app:layout_constraintTop_toBottomOf="@+id/spTypeFood" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tvPriceRange2"
         android:layout_width="145dp"
         android:layout_height="35dp"
         android:layout_marginStart="4dp"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="32dp"
         android:text="Mile Radius:"
         android:textSize="24sp"
         app:layout_constraintStart_toStartOf="@+id/tvPriceRange"
         app:layout_constraintTop_toBottomOf="@+id/spPriceRange" />
-
-    <Spinner
-        android:id="@+id/spTypeFood"
-        android:layout_width="361dp"
-        android:layout_height="34dp"
-        android:layout_marginTop="132dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.68"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <Spinner
         android:id="@+id/spPriceRange"
