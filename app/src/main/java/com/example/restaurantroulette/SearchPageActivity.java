@@ -30,7 +30,8 @@ public class SearchPageActivity extends AppCompatActivity implements AdapterView
     private Spinner spLocation;
     private Spinner spRating;
     private Button btRandomize;
-    public String zipcode;
+    String businessName;
+    HomeFragment g = new HomeFragment();
 
     //redirect to the specific api request I need
     public static final String BUSINESS_INFO = "https://api.yelp.com/v3/businesses/search";
@@ -77,17 +78,20 @@ public class SearchPageActivity extends AppCompatActivity implements AdapterView
         //whatever follows the "?location=" is the user's location
         //debugger shows what happens in action and the data collected by the API
         //TODO: get zipcode input from the search page
-        //zipCode = ;
-        client.get(BUSINESS_INFO + "?location=33196"  , headers, null, new JsonHttpResponseHandler() {
+        String zipcode = g.getZip();
+        client.get(BUSINESS_INFO + "?location=" + "" + zipcode + "", headers, null, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Headers headers, JSON json){
                 try {
                     //for testing reasons, gets first restaurant
                     JSONObject business = json.jsonObject.getJSONArray("businesses").getJSONObject(0);
+                    businessName = business.getString("name");
 
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
+                //testing
+                Toast.makeText(SearchPageActivity.this, "the name of the first restaurant is: " + businessName , Toast.LENGTH_SHORT).show();
             }
             @Override
             public void onFailure(int statusCode, Headers headers, String response, Throwable throwable) {}
@@ -95,6 +99,7 @@ public class SearchPageActivity extends AppCompatActivity implements AdapterView
     }
     private void goRestaurantPage(){
         Intent i = new Intent(SearchPageActivity.this, RestaurantActivity.class);
+
         startActivity(i);
         finish();
     }

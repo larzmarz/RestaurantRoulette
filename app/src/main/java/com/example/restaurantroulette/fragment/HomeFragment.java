@@ -39,7 +39,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
                     Toast.makeText(getContext(), "Let the adventure begin", Toast.LENGTH_SHORT).show();
                     //this zip code is what will go into the yelp location section
                     zipCode = etZipCode.getText().toString();
-
+                    holdingZipCode(zipCode);
                     goSearchPage();
                 }else{
                     Toast.makeText(getContext(), "Enter your Zip Code", Toast.LENGTH_SHORT).show();
@@ -47,6 +47,10 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
             }
         });
         return view;
+    }
+
+    private String holdingZipCode(String zipCode) {
+        return zipCode;
     }
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstances) {
         super.onViewCreated(view, savedInstances);
