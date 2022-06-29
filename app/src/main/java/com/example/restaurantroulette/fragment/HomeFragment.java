@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,17 +36,18 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
             @Override
             public void onClick(View v) {
                 //TODO: Set limits on zip codes so they don't exceed 5 digits, note: some zipcodes start with two zeros
-                if(!etZipCode.getText().toString().isEmpty()){
+                if(etZipCode.getText().toString().isEmpty()){
+                    Toast.makeText(getContext(), "Enter your Zip Code", Toast.LENGTH_SHORT).show();
+                }else{
                     Toast.makeText(getContext(), "Let the adventure begin", Toast.LENGTH_SHORT).show();
                     //this zip code is what will go into the yelp location section
                     zipCode = etZipCode.getText().toString();
-                    holdingZipCode(zipCode);
+                    Log.i("hello", "onClick: "+zipCode);
                     goSearchPage();
-                }else{
-                    Toast.makeText(getContext(), "Enter your Zip Code", Toast.LENGTH_SHORT).show();
                 }
             }
         });
+
         return view;
     }
 

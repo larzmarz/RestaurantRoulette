@@ -79,7 +79,7 @@ public class SearchPageActivity extends AppCompatActivity implements AdapterView
         //debugger shows what happens in action and the data collected by the API
         //TODO: get zipcode input from the search page
         String zipcode = g.getZip();
-        client.get(BUSINESS_INFO + "?location=" + "" + zipcode + "", headers, null, new JsonHttpResponseHandler() {
+        client.get(BUSINESS_INFO + "?location=" + zipcode , headers, null, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Headers headers, JSON json){
                 try {
