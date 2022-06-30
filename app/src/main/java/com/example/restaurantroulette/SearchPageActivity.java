@@ -1,11 +1,9 @@
 package com.example.restaurantroulette;
 
-import static com.facebook.stetho.inspector.network.PrettyPrinterDisplayType.JSON;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -21,7 +19,7 @@ import com.example.restaurantroulette.fragment.HomeFragment;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.lang.reflect.Array;
+import java.util.ArrayList;
 
 import okhttp3.Headers;
 public class SearchPageActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
@@ -30,6 +28,9 @@ public class SearchPageActivity extends AppCompatActivity implements AdapterView
     private Spinner spLocation;
     private Spinner spRating;
     private Button btRandomize;
+    ArrayList<JSONObject> name;
+    ArrayList<JSONObject> rating;
+    ArrayList<JSONObject> price;
     String businessName;
     HomeFragment g = new HomeFragment();
 
@@ -69,7 +70,6 @@ public class SearchPageActivity extends AppCompatActivity implements AdapterView
         spLocation.setAdapter(adapter2);
         spRating.setAdapter(adapter3);
 
-
         //calling Yelp API commands
         AsyncHttpClient client = new AsyncHttpClient();
         RequestHeaders headers = new RequestHeaders();
@@ -79,27 +79,41 @@ public class SearchPageActivity extends AppCompatActivity implements AdapterView
         //debugger shows what happens in action and the data collected by the API
         //TODO: get zipcode input from the search page
         String zipcode = g.getZip();
-        client.get(BUSINESS_INFO + "?location=" + zipcode , headers, null, new JsonHttpResponseHandler() {
+        Toast.makeText(this, "zip is" + zipcode, Toast.LENGTH_SHORT).show();
+        client.get(BUSINESS_INFO + "?location=33176" + zipcode , headers, null, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Headers headers, JSON json){
                 try {
                     //for testing reasons, gets first restaurant
                     JSONObject business = json.jsonObject.getJSONArray("businesses").getJSONObject(0);
                     businessName = business.getString("name");
-
-                } catch (JSONException e) {
+                    for(int i = 0; i < json.jsonObject.length(); i++){
+                        //adding all the values of the restaurants given to the app through json into their respective arrays
+                        AddToArrayOfNames(json.jsonObject.getJSONArray("names").getJSONObject(i));
+                        AddToArrayOfRating(json.jsonObject.getJSONArray("rating").getJSONObject(i));
+                        AddToArrayofPrice(json.jsonObject.getJSONArray("price").getJSONObject(i));
+                    }
+                }catch (JSONException e) {
                     e.printStackTrace();
                 }
-                //testing
-                Toast.makeText(SearchPageActivity.this, "the name of the first restaurant is: " + businessName , Toast.LENGTH_SHORT).show();
             }
             @Override
             public void onFailure(int statusCode, Headers headers, String response, Throwable throwable) {}
         });
     }
+    //storing the different strings to then compare their values
+    private void AddToArrayofPrice(JSONObject json){price.add(json);}
+    private void AddToArrayOfRating(JSONObject json){
+        rating.add(json);
+    }
+    private void AddToArrayOfNames(JSONObject json){
+        name.add(json);
+    }
+    //TODO: sort all the values to then throw the options back at the spinners
+
+
     private void goRestaurantPage(){
         Intent i = new Intent(SearchPageActivity.this, RestaurantActivity.class);
-
         startActivity(i);
         finish();
     }

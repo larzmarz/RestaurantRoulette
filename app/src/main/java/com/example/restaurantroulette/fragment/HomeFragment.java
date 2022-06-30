@@ -42,7 +42,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
                     Toast.makeText(getContext(), "Let the adventure begin", Toast.LENGTH_SHORT).show();
                     //this zip code is what will go into the yelp location section
                     zipCode = etZipCode.getText().toString();
-                    Log.i("hello", "onClick: "+zipCode);
+                    Log.i("hello", "onClick: " + zipCode);
                     goSearchPage();
                 }
             }

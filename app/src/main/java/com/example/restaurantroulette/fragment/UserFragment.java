@@ -29,11 +29,14 @@ import com.parse.ParseFile;
 import com.parse.ParseObject;
 import com.parse.ParseUser;
 
+import org.w3c.dom.Text;
+
 public class UserFragment extends BaseFragment implements View.OnClickListener{
     private Button btLogout;
 
     TextView tvUsername;
     ImageView ivProfilePhoto;
+    TextView tvDescription;
     public User user = (User) ParseUser.getCurrentUser();
 
     @Override
@@ -49,6 +52,7 @@ public class UserFragment extends BaseFragment implements View.OnClickListener{
         // Setup any handles to view objects here
         // EditText etFoo = (EditText) view.findViewById(R.id.etFoo);
         tvUsername = view.findViewById(R.id.tvUsername);
+        tvDescription = view.findViewById(R.id.tvDescription);
         ivProfilePhoto = view.findViewById(R.id.ivProfilePhoto);
         ivProfilePhoto.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,6 +73,8 @@ public class UserFragment extends BaseFragment implements View.OnClickListener{
 
     public void displayUserInfo(){
         tvUsername.setText(user.getUsername());
+        //TODO: make sure this is the right setter
+        tvDescription.setText((CharSequence) user.getDescription());
         ParseFile profilePhoto = user.getProfilePhoto();
         if(profilePhoto != null){
             Glide.with(getContext()).load(user.getProfilePhoto().getUrl()).circleCrop().into(ivProfilePhoto);
@@ -96,41 +102,5 @@ public class UserFragment extends BaseFragment implements View.OnClickListener{
     }
 
     @Override
-    public void onClick(View v) {
-
-    }
-//    View view;
-//    // Required empty public constructor
-//    public UserFragment() {}
-//    @Override
-//    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-//        // Inflate the layout for this fragment
-//        view = inflater.inflate(R.layout.fragment_user, container, false);
-//        btLogout = view.findViewById(R.id.btLogout);
-//        //when the user clicks the logout button
-//        btLogout.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Toast.makeText(getContext(), "Logged out!", Toast.LENGTH_SHORT).show();
-//                onLogout();
-//            }
-//        });
-//        return view;
-//    }
-//    private void onLogout() {
-//        //logout of account
-//        ParseUser.logOut();
-//        ParseUser currentUser =ParseUser.getCurrentUser();
-//        //redirect to login page
-//        Intent i = new Intent(getContext(), LoginActivity.class);
-//        startActivity(i);
-//    }
-//    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstances) {
-//        super.onViewCreated(view, savedInstances);
-//    }
-//    //empty Onclick for onclicklistener implementation
-//    @Override
-//    public void onClick(View v) {
-//    }
-
+    public void onClick(View v) {}
 }

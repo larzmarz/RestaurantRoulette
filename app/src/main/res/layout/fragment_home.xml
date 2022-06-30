@@ -5,7 +5,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/tempbackgroundsearch"
+    android:background="@drawable/orange_splash"
     tools:context=".fragment.HomeFragment">
 
     <androidx.appcompat.widget.AppCompatButton
@@ -14,9 +14,10 @@
         android:layout_height="65dp"
         android:layout_marginStart="161dp"
         android:layout_marginEnd="156dp"
-        android:background="#73FFFFFF"
-        android:backgroundTint="#39423F3F"
+        android:background="#73F1F0F0"
+        android:backgroundTint="#DDFFFFFF"
         android:text="Start your search"
+        android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.522"
@@ -29,10 +30,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="32dp"
+        android:backgroundTint="@color/white"
         android:ems="10"
-        android:hint="Zip Code"
+        android:hint="Zip Code..."
         android:inputType="textPersonName"
-        android:textColor="#040404"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#FFFFFF"
         app:layout_constraintBottom_toTopOf="@+id/btStartSearch"
         app:layout_constraintEnd_toEndOf="@+id/btStartSearch"
         app:layout_constraintStart_toStartOf="@+id/btStartSearch" />
