@@ -33,18 +33,15 @@ import org.w3c.dom.Text;
 
 public class UserFragment extends BaseFragment implements View.OnClickListener{
     private Button btLogout;
-
     TextView tvUsername;
     ImageView ivProfilePhoto;
     TextView tvDescription;
     public User user = (User) ParseUser.getCurrentUser();
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
         // Defines the xml file for the fragment
         return inflater.inflate(R.layout.fragment_user, parent, false);
     }
-
     // This event is triggered soon after onCreateView().
     // Any view setup should occur here.  E.g., view lookups and attaching view listeners.
     @Override
@@ -61,7 +58,6 @@ public class UserFragment extends BaseFragment implements View.OnClickListener{
                 launchCamera();
             }
         });
-
         user.fetchInBackground(new GetCallback<ParseObject>() {
             @Override
             public void done(ParseObject object, ParseException e) {
@@ -70,7 +66,6 @@ public class UserFragment extends BaseFragment implements View.OnClickListener{
             }
         });
     }
-
     public void displayUserInfo(){
         tvUsername.setText(user.getUsername());
         //TODO: make sure this is the right setter
@@ -82,7 +77,6 @@ public class UserFragment extends BaseFragment implements View.OnClickListener{
             Toast.makeText(getContext(), "Profile Photo does not exist for " + user.getUsername(), Toast.LENGTH_SHORT).show();
         }
     }
-
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -100,7 +94,6 @@ public class UserFragment extends BaseFragment implements View.OnClickListener{
             }
         }
     }
-
     @Override
     public void onClick(View v) {}
 }

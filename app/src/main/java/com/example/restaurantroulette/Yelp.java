@@ -15,6 +15,7 @@ public class Yelp {
     public String price;
     public Double rating;
     public String alias;
+    String posterPath;
 
     //empty for Parcel
     public Yelp(){
@@ -24,6 +25,7 @@ public class Yelp {
         locationAddress1 = jsonObject.getString("location.address1");
         locationAddress2 = jsonObject.getString("location.address2");
         locationAddress3 = jsonObject.getString("location.address3");
+        posterPath = jsonObject.getString("poster_path");
 
         name = jsonObject.getString("name");
         price = jsonObject.getString("price");
@@ -38,4 +40,9 @@ public class Yelp {
     public String getPrice() {return price;}
     public Double getRating() {return rating;}
     public String getAlias() {return alias;}
+
+
+    public String getPosterPath() {
+        return String.format("https://image.tmdb.org/t/p/w342/%s", posterPath);
+    }
 }

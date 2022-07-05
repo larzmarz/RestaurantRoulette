@@ -11,8 +11,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.restaurantroulette.R;
@@ -21,6 +23,7 @@ import com.example.restaurantroulette.SearchPageActivity;
 public class HomeFragment extends Fragment implements View.OnClickListener{
     public Button btStart;
     public EditText etZipCode;
+    public Spinner spLocation;
     //TODO: change to int when time to set limits on zip codes
     public String zipCode;
     View view;
@@ -32,6 +35,12 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
         //zipCode = Integer.parseInt(etZipCode.getText().toString());
         btStart = view.findViewById(R.id.btStartSearch);
         //when the user clicks the start button
+        //TODO: See why there is an error in line 41
+        /*spLocation = view.findViewById(R.id.spMileRadius);
+        String[] mileRadius = getResources().getStringArray(R.array.mile_radius);
+        ArrayAdapter adapter2 = new ArrayAdapter(HomeFragment.this, android.R.layout.simple_spinner_item, mileRadius);
+        adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spLocation.setAdapter(adapter2);*/
         btStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

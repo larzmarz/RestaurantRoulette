@@ -8,6 +8,16 @@
     android:background="@drawable/orange_splash"
     tools:context=".fragment.HomeFragment">
 
+    <TextView
+        android:id="@+id/tvPriceRange3"
+        android:layout_width="125dp"
+        android:layout_height="30dp"
+        android:text="Mile Radius:"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        tools:layout_editor_absoluteX="101dp"
+        tools:layout_editor_absoluteY="254dp" />
+
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btStartSearch"
         android:layout_width="234dp"
@@ -20,24 +30,31 @@
         android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.522"
+        app:layout_constraintHorizontal_bias="0.521"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.474" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/etZipCode"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="32dp"
         android:backgroundTint="@color/white"
         android:ems="10"
         android:hint="Zip Code..."
         android:inputType="textPersonName"
         android:textColor="#FFFFFF"
         android:textColorHint="#FFFFFF"
-        app:layout_constraintBottom_toTopOf="@+id/btStartSearch"
         app:layout_constraintEnd_toEndOf="@+id/btStartSearch"
-        app:layout_constraintStart_toStartOf="@+id/btStartSearch" />
+        app:layout_constraintStart_toStartOf="@+id/btStartSearch"
+        tools:layout_editor_absoluteY="187dp" />
+
+    <Spinner
+        android:id="@+id/spMileRadius"
+        android:layout_width="214dp"
+        android:layout_height="42dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.512"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="284dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
