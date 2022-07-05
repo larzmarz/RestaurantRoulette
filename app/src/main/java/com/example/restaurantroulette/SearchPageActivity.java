@@ -32,7 +32,6 @@ public class SearchPageActivity extends AppCompatActivity implements AdapterView
     ArrayList<JSONObject> rating;
     ArrayList<JSONObject> price;
     String businessName;
-    HomeFragment g = new HomeFragment();
 
     //redirect to the specific api request I need
     public static final String BUSINESS_INFO = "https://api.yelp.com/v3/businesses/search";
@@ -40,6 +39,9 @@ public class SearchPageActivity extends AppCompatActivity implements AdapterView
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_page);
+        Intent intent = getIntent();
+        String zipcode = intent.getStringExtra("zip");
+        HomeFragment g = new HomeFragment();
         //spTypeFood = findViewById(R.id.spTypeFood);
         spPriceRange = findViewById(R.id.spPriceRange);
         spLocation = findViewById(R.id.spMileRadius);
@@ -78,9 +80,8 @@ public class SearchPageActivity extends AppCompatActivity implements AdapterView
         //whatever follows the "?location=" is the user's location
         //debugger shows what happens in action and the data collected by the API
         //TODO: get zipcode input from the search page
-        String zipcode = g.getZip();
         Toast.makeText(this, "zip is" + zipcode, Toast.LENGTH_SHORT).show();
-        client.get(BUSINESS_INFO + "?location=33176" + zipcode , headers, null, new JsonHttpResponseHandler() {
+        client.get(BUSINESS_INFO + "?location=" + zipcode , headers, null, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Headers headers, JSON json){
                 try {
@@ -91,7 +92,7 @@ public class SearchPageActivity extends AppCompatActivity implements AdapterView
                         //adding all the values of the restaurants given to the app through json into their respective arrays
                         AddToArrayOfNames(json.jsonObject.getJSONArray("names").getJSONObject(i));
                         AddToArrayOfRating(json.jsonObject.getJSONArray("rating").getJSONObject(i));
-                        AddToArrayofPrice(json.jsonObject.getJSONArray("price").getJSONObject(i));
+                        AddToArrayOfPrice(json.jsonObject.getJSONArray("price").getJSONObject(i));
                     }
                 }catch (JSONException e) {
                     e.printStackTrace();
@@ -102,15 +103,42 @@ public class SearchPageActivity extends AppCompatActivity implements AdapterView
         });
     }
     //storing the different strings to then compare their values
-    private void AddToArrayofPrice(JSONObject json){price.add(json);}
+    //TODO: deal with repeats
+    private void AddToArrayOfPrice(JSONObject json){price.add(json);}
     private void AddToArrayOfRating(JSONObject json){
         rating.add(json);
     }
     private void AddToArrayOfNames(JSONObject json){
         name.add(json);
     }
+
     //TODO: sort all the values to then throw the options back at the spinners
 
+    //all the booleans for the prices, if all are true, then the spinner will include all the money signs
+    public boolean MoneySign1(JSONObject jsonObject) throws JSONException {
+        if(jsonObject.getJSONArray("price").equals("$")){
+            return true;
+        }
+        return false;
+    }
+    public boolean MoneySign2(JSONObject jsonObject) throws JSONException{
+        if(jsonObject.getJSONArray("price").equals("$$")){
+            return true;
+        }
+        return false;
+    }
+    public boolean MoneySign3(JSONObject jsonObject) throws JSONException{
+        if(jsonObject.getJSONArray("price").equals("$$$")){
+            return true;
+        }
+        return false;
+    }
+    public boolean MoneySign4(JSONObject jsonObject) throws JSONException{
+        if(jsonObject.getJSONArray("price").equals("$$$$")){
+            return true;
+        }
+        return false;
+    }
 
     private void goRestaurantPage(){
         Intent i = new Intent(SearchPageActivity.this, RestaurantActivity.class);

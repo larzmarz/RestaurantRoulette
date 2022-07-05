@@ -47,10 +47,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
                 }
             }
         });
-
         return view;
     }
-
     private String holdingZipCode(String zipCode) {
         return zipCode;
     }
@@ -60,6 +58,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
     //redirects user to page where they will search for a restaurant
     private void goSearchPage() {
         Intent i = new Intent(getActivity(), SearchPageActivity.class);
+        i.putExtra("zip", zipCode);
         startActivity(i);
     }
     //empty method for implementation of view.onclicklistener
