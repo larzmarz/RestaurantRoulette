@@ -17,7 +17,9 @@ import com.codepath.asynchttpclient.AsyncHttpClient;
 import com.codepath.asynchttpclient.RequestHeaders;
 import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler;
 import com.example.restaurantroulette.fragment.HomeFragment;
+import com.google.gson.JsonParser;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -30,12 +32,13 @@ public class SearchPageActivity extends AppCompatActivity implements AdapterView
     private Spinner spLocation;
     private Spinner spRating;
     private Button btRandomize;
-    ArrayList<JSONObject> alias;
-    ArrayList<JSONObject> rating;
-    ArrayList<JSONObject> price;
+    ArrayList<String> alias;
+    ArrayList<Double> rating;
+    ArrayList<String> price;
     String[] priceString;
     String[] ratingString;
-    String businessName;
+    JSONObject businessName;
+    Yelp restaurant = new Yelp();
 
     //redirect to the specific api request I need
     public static final String BUSINESS_INFO = "https://api.yelp.com/v3/businesses/search";
@@ -56,6 +59,10 @@ public class SearchPageActivity extends AppCompatActivity implements AdapterView
             }
         });
 
+        alias = new ArrayList<String>();
+        price = new ArrayList<String>();
+        rating = new ArrayList<Double>();
+
         //calling Yelp API commands
         AsyncHttpClient client = new AsyncHttpClient();
         RequestHeaders headers = new RequestHeaders();
@@ -67,23 +74,22 @@ public class SearchPageActivity extends AppCompatActivity implements AdapterView
         String location = "?location=" + zipcode;
         Toast.makeText(this, "zip is" + zipcode, Toast.LENGTH_SHORT).show();
         client.get(BUSINESS_INFO + "?location=33176", headers, null, new JsonHttpResponseHandler() {
+
+
             @Override
             public void onSuccess(int statusCode, Headers headers, JSON json){
                 Log.i("test", "");
                 try {
                     //for testing reasons, gets first restaurant
-                    JSONObject business = json.jsonObject.getJSONArray("businesses").getJSONObject(0);
-                    JSONObject image = json.jsonObject.getJSONArray("image_url").getJSONObject(0);
-                    businessName = business.getString("name");
-                    Intent intent = new Intent();
-                    //these two intents will serve to transport the data of he restaurant to the restaurant page
-                    intent.putExtra("restaurant", (Parcelable) business);
-                    intent.putExtra("image", (Parcelable) image);
-                    for(int i = 0; i < json.jsonObject.getJSONArray("name").length(); i++){
+                    JSONArray businesses = json.jsonObject.getJSONArray("businesses");
+
+                    for(int i = 0; i < businesses.length(); i++){
                         //adding all the values of the restaurants given to the app through json into their respective arrays
-                        AddToArrayOfAlias(json.jsonObject.getJSONArray("alias").getJSONObject(i));
-                        AddToArrayOfRating(json.jsonObject.getJSONArray("rating").getJSONObject(i));
-                        AddToArrayOfPrice(json.jsonObject.getJSONArray("price").getJSONObject(i));
+                        JSONObject objectBusiness = businesses.getJSONObject(i);
+                        AddToArrayOfAlias(objectBusiness.getString("alias"));
+                        AddToArrayOfRating(objectBusiness.getDouble("rating"));
+                        AddToArrayOfPrice(objectBusiness.getString("price"));
+                        //go into the categories to get the correct aliases
                     }
                     //price String array set up
                     if(price.contains("$") && price.contains("$$") && price.contains("$$$") && price.contains("$$$$")){
@@ -146,6 +152,7 @@ public class SearchPageActivity extends AppCompatActivity implements AdapterView
         String[] priceRange = getResources().getStringArray(R.array.price_range);
 
         //TODO: make the string array priceString & ratingString successfully link below
+        //priceString crashes the app
         ArrayAdapter adapter1 = new ArrayAdapter(this, android.R.layout.simple_spinner_item, priceRange);
         //ArrayAdapter adapter2 = new ArrayAdapter(this, android.R.layout.simple_spinner_item, mileRadius);
         ArrayAdapter adapter3 = new ArrayAdapter(this, android.R.layout.simple_spinner_item, rating);
@@ -157,12 +164,13 @@ public class SearchPageActivity extends AppCompatActivity implements AdapterView
     }
     //storing the different strings to then compare their values
     //TODO: deal with repeats
-    private void AddToArrayOfPrice(JSONObject json){price.add(json);}
-    private void AddToArrayOfRating(JSONObject json){rating.add(json);}
+    private void AddToArrayOfPrice(String p){
+        price.add(p);}
+    private void AddToArrayOfRating(Double r){rating.add(r);}
     //adds alias if it's not a repeat
-    private void AddToArrayOfAlias(JSONObject json){
-        if(!alias.contains(json)) {
-            alias.add(json);
+    private void AddToArrayOfAlias(String a){
+        if(!alias.contains(a)) {
+            alias.add(a);
         }
     }
     //TODO: sort all the values to then throw the options back at the spinners

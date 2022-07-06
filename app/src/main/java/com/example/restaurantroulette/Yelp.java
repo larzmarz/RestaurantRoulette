@@ -5,6 +5,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.parceler.Parcel;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Parcel
 public class Yelp {
     public String locationZip;
@@ -20,29 +23,19 @@ public class Yelp {
     //empty for Parcel
     public Yelp(){
     }
-    public Yelp(JSONObject jsonObject) throws JSONException{
-        locationZip = jsonObject.getString("location.zip_code");
-        locationAddress1 = jsonObject.getString("location.address1");
-        locationAddress2 = jsonObject.getString("location.address2");
-        locationAddress3 = jsonObject.getString("location.address3");
-        posterPath = jsonObject.getString("poster_path");
+    public static Yelp fromJson(JSONObject jsonObject) throws JSONException{
+        Yelp yelp = new Yelp();
+        yelp.locationZip = jsonObject.getString("location.zip_code");
+        yelp.locationAddress1 = jsonObject.getString("location.address1");
+        yelp.locationAddress2 = jsonObject.getString("location.address2");
+        yelp.locationAddress3 = jsonObject.getString("location.address3");
 
-        name = jsonObject.getString("name");
-        price = jsonObject.getString("price");
-        rating = jsonObject.getDouble("rating");
-        alias = jsonObject.getString("alias");
+        yelp.name = jsonObject.getString("name");
+        yelp.price = jsonObject.getString("price");
+        yelp.rating = jsonObject.getDouble("rating");
+        yelp.alias = jsonObject.getString("alias");
+
+        return yelp;
     }
-    public String getLocationZip() {return locationZip;}
-    public String getLocationAddress1() {return locationAddress1;}
-    public String getLocationAddress2() {return locationAddress2;}
-    public String getLocationAddress3() {return locationAddress3;}
-    public String getName() {return name;}
-    public String getPrice() {return price;}
-    public Double getRating() {return rating;}
-    public String getAlias() {return alias;}
 
-
-    public String getPosterPath() {
-        return String.format("https://image.tmdb.org/t/p/w342/%s", posterPath);
-    }
 }
