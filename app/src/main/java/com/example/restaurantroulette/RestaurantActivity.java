@@ -30,5 +30,6 @@ public class RestaurantActivity extends AppCompatActivity {
         tvRestaurantDetails = findViewById(R.id.tvRestaurantDetails);
         Intent intent = getIntent();
         JSONObject restaurant = intent.getParcelableExtra("restaurant");
+
     }
 }

@@ -24,7 +24,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
     public Button btStart;
     public EditText etZipCode;
     public Spinner spLocation;
-    //TODO: change to int when time to set limits on zip codes
+    //TODO: change to int when time comes to set limits on zip codes
     public String zipCode;
     View view;
     @Override
@@ -35,12 +35,14 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
         //zipCode = Integer.parseInt(etZipCode.getText().toString());
         btStart = view.findViewById(R.id.btStartSearch);
         //when the user clicks the start button
+
         //TODO: See why there is an error in line 41
         /*spLocation = view.findViewById(R.id.spMileRadius);
         String[] mileRadius = getResources().getStringArray(R.array.mile_radius);
         ArrayAdapter adapter2 = new ArrayAdapter(HomeFragment.this, android.R.layout.simple_spinner_item, mileRadius);
         adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spLocation.setAdapter(adapter2);*/
+
         btStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -57,9 +59,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
             }
         });
         return view;
-    }
-    private String holdingZipCode(String zipCode) {
-        return zipCode;
     }
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstances) {
         super.onViewCreated(view, savedInstances);

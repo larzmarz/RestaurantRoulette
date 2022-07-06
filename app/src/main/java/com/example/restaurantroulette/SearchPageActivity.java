@@ -33,6 +33,8 @@ public class SearchPageActivity extends AppCompatActivity implements AdapterView
     ArrayList<JSONObject> alias;
     ArrayList<JSONObject> rating;
     ArrayList<JSONObject> price;
+    String[] priceString;
+
     String businessName;
 
     //redirect to the specific api request I need
@@ -53,24 +55,6 @@ public class SearchPageActivity extends AppCompatActivity implements AdapterView
                 goRestaurantPage();
             }
         });
-        //setting the spinners, testing variables, not real options
-        //String[] typeFood = getResources().getStringArray(R.array.food_items);
-        String[] priceRange = getResources().getStringArray(R.array.price_range);
-        String[] mileRadius = getResources().getStringArray(R.array.mile_radius);
-        String[] rating = getResources().getStringArray(R.array.rating);
-
-        //ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, typeFood);
-        ArrayAdapter adapter1 = new ArrayAdapter(this, android.R.layout.simple_spinner_item, priceRange);
-        //ArrayAdapter adapter2 = new ArrayAdapter(this, android.R.layout.simple_spinner_item, mileRadius);
-        ArrayAdapter adapter3 = new ArrayAdapter(this, android.R.layout.simple_spinner_item, rating);
-        //adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        //adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        adapter3.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        //spTypeFood.setAdapter(adapter);
-        spPriceRange.setAdapter(adapter1);
-        //spLocation.setAdapter(adapter2);
-        spRating.setAdapter(adapter3);
 
         //calling Yelp API commands
         AsyncHttpClient client = new AsyncHttpClient();
@@ -101,6 +85,37 @@ public class SearchPageActivity extends AppCompatActivity implements AdapterView
                         AddToArrayOfRating(json.jsonObject.getJSONArray("rating").getJSONObject(i));
                         AddToArrayOfPrice(json.jsonObject.getJSONArray("price").getJSONObject(i));
                     }
+                    if(price.contains("$") && price.contains("$$") && price.contains("$$$") && price.contains("$$$$")){
+                        priceString = new String[]{"$", "$$", "$$$", "$$$$"};
+                    }else if(!price.contains("$") && price.contains("$$") && price.contains("$$$") && price.contains("$$$$")){
+                        priceString = new String[]{"$$", "$$$", "$$$$"};
+                    }else if(!price.contains("$") && !price.contains("$$") && price.contains("$$$") && price.contains("$$$$")){
+                        priceString = new String[]{"$$$", "$$$$"};
+                    }else if(!price.contains("$") && !price.contains("$$") && !price.contains("$$$") && price.contains("$$$$")){
+                        priceString = new String[]{"$$$$"};
+                    }else if(price.contains("$") && !price.contains("$$") && price.contains("$$$") && !price.contains("$$$$")){
+                        priceString = new String[]{"$", "$$$"};
+                    }else if(price.contains("$") && price.contains("$$") && !price.contains("$$$") && !price.contains("$$$$")){
+                        priceString = new String[]{"$", "$$"};
+                    }else if(price.contains("$") && price.contains("$$") && price.contains("$$$") && !price.contains("$$$$")){
+                        priceString = new String[]{"$", "$$", "$$$"};
+                    }else if(!price.contains("$") && price.contains("$$") && !price.contains("$$$") && !price.contains("$$$$")){
+                        priceString = new String[]{"$$"};
+                    }else if(!price.contains("$") && price.contains("$$") && price.contains("$$$") && !price.contains("$$$$")){
+                        priceString = new String[]{"$$", "$$$"};
+                    }else if(!price.contains("$") && !price.contains("$$") && price.contains("$$$") && !price.contains("$$$$")){
+                        priceString = new String[]{"$$$"};
+                    }else if(price.contains("$") && !price.contains("$$") && price.contains("$$$") && price.contains("$$$$")){
+                        priceString = new String[]{"$", "$$$", "$$$$"};
+                    }else if(price.contains("$") && !price.contains("$$") && !price.contains("$$$") && price.contains("$$$$")){
+                        priceString = new String[]{"$", "$$$$"};
+                    }else if(price.contains("$") && price.contains("$$") && !price.contains("$$$") && price.contains("$$$$")){
+                        priceString = new String[]{"$", "$$", "$$$$"};
+                    }else if(!price.contains("$") && price.contains("$$") && !price.contains("$$$") && price.contains("$$$$")){
+                        priceString = new String[]{"$$", "$$$$"};
+                    }else if(price.contains("$") && !price.contains("$$") && !price.contains("$$$") && !price.contains("$$$$")){
+                        priceString = new String[]{"$"};
+                    }
                 }catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -110,24 +125,31 @@ public class SearchPageActivity extends AppCompatActivity implements AdapterView
                 Log.i("fail", "");
             }
         });
+        //setting the spinners, testing variables, not real options
+        String[] mileRadius = getResources().getStringArray(R.array.mile_radius);
+        String[] rating = getResources().getStringArray(R.array.rating);
+        String[] priceRange = getResources().getStringArray(R.array.price_range);
+
+        //TODO: make the string array priceString successfully link below
+        ArrayAdapter adapter1 = new ArrayAdapter(this, android.R.layout.simple_spinner_item, priceRange);
+        //ArrayAdapter adapter2 = new ArrayAdapter(this, android.R.layout.simple_spinner_item, mileRadius);
+        ArrayAdapter adapter3 = new ArrayAdapter(this, android.R.layout.simple_spinner_item, rating);
+        adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        //adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        adapter3.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spPriceRange.setAdapter(adapter1);
+        spRating.setAdapter(adapter3);
     }
     //storing the different strings to then compare their values
     //TODO: deal with repeats
     private void AddToArrayOfPrice(JSONObject json){price.add(json);}
     private void AddToArrayOfRating(JSONObject json){rating.add(json);}
-    private void AddToArrayOfAlias(JSONObject json){alias.add(json);}
+    private void AddToArrayOfAlias(JSONObject json){
+        if(!alias.contains(json)) {
+            alias.add(json);
+        }
+    }
     //TODO: sort all the values to then throw the options back at the spinners
-
-    //all the booleans for the prices, if all are true, then the spinner will include all the money signs
-    public boolean MoneySign1(JSONObject jsonObject) throws JSONException {
-        if(jsonObject.getJSONArray("price").equals("$")){return true;}return false;}
-    public boolean MoneySign2(JSONObject jsonObject) throws JSONException{
-        if(jsonObject.getJSONArray("price").equals("$$")){return true;}return false;}
-    public boolean MoneySign3(JSONObject jsonObject) throws JSONException{
-        if(jsonObject.getJSONArray("price").equals("$$$")){return true;}return false;}
-    public boolean MoneySign4(JSONObject jsonObject) throws JSONException{
-        if(jsonObject.getJSONArray("price").equals("$$$$")){return true;}return false;}
-
     //booleans for rating
     public boolean RatingSign1(JSONObject jsonObject) throws JSONException {
         if(jsonObject.getJSONArray("rating").equals("1")){return true;}return false;}
@@ -139,10 +161,6 @@ public class SearchPageActivity extends AppCompatActivity implements AdapterView
         if(jsonObject.getJSONArray("rating").equals("4")){return true;}return false;}
     public boolean RatingSign5(JSONObject jsonObject) throws JSONException {
         if(jsonObject.getJSONArray("rating").equals("5")){return true;}return false;}
-
-    //checking through aliases
-
-
 
     private void goRestaurantPage(){
         Intent i = new Intent(SearchPageActivity.this, RestaurantActivity.class);
