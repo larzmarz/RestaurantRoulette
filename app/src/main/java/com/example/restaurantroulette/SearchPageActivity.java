@@ -35,6 +35,7 @@ public class SearchPageActivity extends AppCompatActivity implements AdapterView
     ArrayList<String> alias;
     ArrayList<Double> rating;
     ArrayList<String> price;
+    ArrayList<String> categoriesAlias;
     String[] priceString;
     String[] ratingString;
     JSONObject businessName;
@@ -62,6 +63,7 @@ public class SearchPageActivity extends AppCompatActivity implements AdapterView
         alias = new ArrayList<String>();
         price = new ArrayList<String>();
         rating = new ArrayList<Double>();
+        categoriesAlias = new ArrayList<String>();
 
         //calling Yelp API commands
         AsyncHttpClient client = new AsyncHttpClient();
@@ -86,10 +88,12 @@ public class SearchPageActivity extends AppCompatActivity implements AdapterView
                     for(int i = 0; i < businesses.length(); i++){
                         //adding all the values of the restaurants given to the app through json into their respective arrays
                         JSONObject objectBusiness = businesses.getJSONObject(i);
-                        AddToArrayOfAlias(objectBusiness.getString("alias"));
+                        //AddToArrayOfAlias(objectBusiness.getString("alias"));
                         AddToArrayOfRating(objectBusiness.getDouble("rating"));
                         AddToArrayOfPrice(objectBusiness.getString("price"));
                         //go into the categories to get the correct aliases
+                        //TODO: see why it interferes with the program above and stops
+                        AddToCategoryAliasArray(objectBusiness.getJSONObject("categories").getString("alias"));
                     }
                     //price String array set up
                     if(price.contains("$") && price.contains("$$") && price.contains("$$$") && price.contains("$$$$")){
@@ -162,10 +166,14 @@ public class SearchPageActivity extends AppCompatActivity implements AdapterView
         spPriceRange.setAdapter(adapter1);
         spRating.setAdapter(adapter3);
     }
+
     //storing the different strings to then compare their values
-    //TODO: deal with repeats
-    private void AddToArrayOfPrice(String p){
-        price.add(p);}
+    private void AddToCategoryAliasArray(String al){
+        if(!categoriesAlias.contains(al)) {
+            categoriesAlias.add(al);
+        }
+    }
+    private void AddToArrayOfPrice(String p){price.add(p);}
     private void AddToArrayOfRating(Double r){rating.add(r);}
     //adds alias if it's not a repeat
     private void AddToArrayOfAlias(String a){
