@@ -8,43 +8,26 @@
     android:background="@drawable/orange_splash"
     tools:context=".fragment.HomeFragment">
 
-    <TextView
-        android:id="@+id/tvPriceRange3"
-        android:layout_width="125dp"
-        android:layout_height="30dp"
-        android:layout_marginStart="100dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="40dp"
-        android:text="Mile Radius:"
-        android:textColor="#FFFFFF"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/btStartSearch"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etZipCode"
-        app:layout_constraintVertical_bias="1.0" />
-
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btStartSearch"
         android:layout_width="234dp"
         android:layout_height="65dp"
-        android:layout_marginStart="161dp"
-        android:layout_marginEnd="156dp"
         android:background="#73F1F0F0"
         android:backgroundTint="#DDFFFFFF"
         android:text="Start your search"
         android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.571"
+        app:layout_constraintHorizontal_bias="0.521"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.533" />
+        app:layout_constraintVertical_bias="0.445" />
 
     <EditText
         android:id="@+id/etZipCode"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="208dp"
+        android:layout_marginTop="228dp"
         android:backgroundTint="@color/white"
         android:ems="10"
         android:hint="Zip Code..."
@@ -54,14 +37,5 @@
         app:layout_constraintEnd_toEndOf="@+id/btStartSearch"
         app:layout_constraintStart_toStartOf="@+id/btStartSearch"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <Spinner
-        android:id="@+id/spMileRadius"
-        android:layout_width="214dp"
-        android:layout_height="42dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.512"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvPriceRange3" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

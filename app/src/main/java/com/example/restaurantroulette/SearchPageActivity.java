@@ -34,7 +34,7 @@ public class SearchPageActivity extends AppCompatActivity implements AdapterView
     ArrayList<JSONObject> rating;
     ArrayList<JSONObject> price;
     String[] priceString;
-
+    String[] ratingString;
     String businessName;
 
     //redirect to the specific api request I need
@@ -85,6 +85,7 @@ public class SearchPageActivity extends AppCompatActivity implements AdapterView
                         AddToArrayOfRating(json.jsonObject.getJSONArray("rating").getJSONObject(i));
                         AddToArrayOfPrice(json.jsonObject.getJSONArray("price").getJSONObject(i));
                     }
+                    //price String array set up
                     if(price.contains("$") && price.contains("$$") && price.contains("$$$") && price.contains("$$$$")){
                         priceString = new String[]{"$", "$$", "$$$", "$$$$"};
                     }else if(!price.contains("$") && price.contains("$$") && price.contains("$$$") && price.contains("$$$$")){
@@ -116,6 +117,20 @@ public class SearchPageActivity extends AppCompatActivity implements AdapterView
                     }else if(price.contains("$") && !price.contains("$$") && !price.contains("$$$") && !price.contains("$$$$")){
                         priceString = new String[]{"$"};
                     }
+
+                    //rating string array set up
+                    if(rating.contains("1")){
+                        ratingString = new String[]{"1"};
+                    }else if(rating.contains("2")){
+                        ratingString = new String[]{"2"};
+                    }else if(rating.contains("3")){
+                        ratingString = new String[]{"3"};
+                    }else if(rating.contains("4")){
+                        ratingString = new String[]{"4"};
+                    }else if(rating.contains("5")){
+                        ratingString = new String[]{"5"};
+                    }
+
                 }catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -130,7 +145,7 @@ public class SearchPageActivity extends AppCompatActivity implements AdapterView
         String[] rating = getResources().getStringArray(R.array.rating);
         String[] priceRange = getResources().getStringArray(R.array.price_range);
 
-        //TODO: make the string array priceString successfully link below
+        //TODO: make the string array priceString & ratingString successfully link below
         ArrayAdapter adapter1 = new ArrayAdapter(this, android.R.layout.simple_spinner_item, priceRange);
         //ArrayAdapter adapter2 = new ArrayAdapter(this, android.R.layout.simple_spinner_item, mileRadius);
         ArrayAdapter adapter3 = new ArrayAdapter(this, android.R.layout.simple_spinner_item, rating);
@@ -144,6 +159,7 @@ public class SearchPageActivity extends AppCompatActivity implements AdapterView
     //TODO: deal with repeats
     private void AddToArrayOfPrice(JSONObject json){price.add(json);}
     private void AddToArrayOfRating(JSONObject json){rating.add(json);}
+    //adds alias if it's not a repeat
     private void AddToArrayOfAlias(JSONObject json){
         if(!alias.contains(json)) {
             alias.add(json);
