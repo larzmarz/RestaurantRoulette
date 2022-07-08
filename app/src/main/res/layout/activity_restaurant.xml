@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/orange_splash"
+    android:background="@drawable/tempbackgroundsearch"
     tools:context=".RestaurantActivity">
 
     <ImageView
@@ -23,6 +23,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
         android:text="Resaturants details will go here, with the picture going above"
+        android:textAlignment="center"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
@@ -33,7 +35,7 @@
         android:layout_width="78dp"
         android:layout_height="30dp"
         android:layout_marginStart="100dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="76dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvRestaurantDetails"
         app:srcCompat="@android:drawable/checkbox_on_background" />
@@ -42,8 +44,31 @@
         android:id="@+id/ibNo"
         android:layout_width="76dp"
         android:layout_height="28dp"
-        android:layout_marginStart="48dp"
+        android:layout_marginStart="56dp"
         app:layout_constraintBottom_toBottomOf="@+id/ibYes"
         app:layout_constraintStart_toEndOf="@+id/ibYes"
         app:srcCompat="@android:drawable/ic_notification_clear_all" />
+
+    <TextView
+        android:id="@+id/tvPhoneNumber"
+        android:layout_width="112dp"
+        android:layout_height="35dp"
+        android:text="TextView"
+        android:textAlignment="center"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvRestaurantDetails" />
+
+    <TextView
+        android:id="@+id/tvUrl"
+        android:layout_width="wrap_content"
+        android:layout_height="21dp"
+        android:text="TextView"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvPhoneNumber" />
 </androidx.constraintlayout.widget.ConstraintLayout>

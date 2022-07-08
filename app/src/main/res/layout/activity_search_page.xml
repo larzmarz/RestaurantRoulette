@@ -7,6 +7,17 @@
     android:background="@drawable/orange_splash"
     tools:context=".SearchPageActivity">
 
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btSurpriseMe"
+        android:layout_width="171dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="112dp"
+        android:text="Surprise me"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/spMileRadius"
+        app:layout_constraintHorizontal_bias="0.452"
+        app:layout_constraintStart_toStartOf="@+id/spMileRadius" />
+
     <TextView
         android:id="@+id/tvRating"
         android:layout_width="254dp"
@@ -32,7 +43,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/tvPriceRange2"
+        android:id="@+id/tvMileRadius"
         android:layout_width="145dp"
         android:layout_height="35dp"
         android:layout_marginStart="4dp"
@@ -61,7 +72,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.68"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvPriceRange2" />
+        app:layout_constraintTop_toBottomOf="@+id/tvMileRadius" />
 
     <Spinner
         android:id="@+id/spRating"
@@ -77,7 +88,7 @@
         android:id="@+id/btRandomize"
         android:layout_width="171dp"
         android:layout_height="50dp"
-        android:layout_marginBottom="116dp"
+        android:layout_marginBottom="200dp"
         android:text="randomize"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/spMileRadius"
