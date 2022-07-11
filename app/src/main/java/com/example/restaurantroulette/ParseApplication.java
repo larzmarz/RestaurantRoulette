@@ -10,7 +10,7 @@ public class ParseApplication extends Application {
     public void onCreate() {
         super.onCreate();
         ParseObject.registerSubclass(User.class);
-
+        ParseObject.registerSubclass(Restaurant.class);
         //connecting backend data collection app
         Parse.initialize(new Parse.Configuration.Builder(this)
                 .applicationId("JuEszvWCLncywS7ocP59OXIwZH0qq5OHBwaKLVJf")

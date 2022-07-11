@@ -91,7 +91,7 @@ public class SearchPageActivity extends AppCompatActivity implements AdapterView
         //TODO: get zipcode input from the search page
         String location = "?location=" + zipcode;
         Toast.makeText(this, "zip is" + zipcode, Toast.LENGTH_SHORT).show();
-        client.get(BUSINESS_INFO + "?location=33176", headers, null, new JsonHttpResponseHandler() {
+        client.get(BUSINESS_INFO + "?location=98101", headers, null, new JsonHttpResponseHandler() {
 
 
             @Override

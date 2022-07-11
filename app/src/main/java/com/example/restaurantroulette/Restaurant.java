@@ -12,8 +12,39 @@ import java.util.List;
 
 @ParseClassName("Restaurant")
 public class Restaurant extends ParseObject{
-    public static final String KEY_DESCRIPTION = "";
-    public static final String KEY_IMAGE = "";
-    public static final String KEY_USER = "";
-    public static final String KEY_CREATED_KEY = "";
+    public static final String KEY_DESCRIPTION = "description";
+    public static final String KEY_IMAGE = "image";
+    public static final String KEY_NAME = "name";
+    public static final String KEY_USER = "user";
+    public static final String KEY_CREATED_KEY = "createdAt";
+
+    public ParseUser getUser(){
+        return getParseUser(KEY_USER);
+    }
+    public void setUser(ParseUser user){
+        put(KEY_USER, user);
+    }
+    public String getName(){return getString(KEY_NAME);}
+    public void setName(String name){put(KEY_NAME, name);}
+    public String getDescription(){
+        return getString(KEY_DESCRIPTION);
+    }
+    public void setDescription(String description){
+        put(KEY_DESCRIPTION, description);
+    }
+    public ParseFile getImage() {
+        return getParseFile(KEY_IMAGE);
+    }
+    public void setImage(ParseFile parseFile) {
+        put(KEY_IMAGE, parseFile);
+    }
+    public String getCreated(){
+        return getString(KEY_CREATED_KEY);
+    }
+    public void setCreated(ParseFile date){
+        put(KEY_CREATED_KEY, date);
+    }
+
+
+
 }
