@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.media.Image;
 import android.os.Bundle;
 import android.os.Environment;
@@ -28,6 +30,7 @@ import com.parse.SaveCallback;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.net.URI;
 import java.net.URL;
@@ -69,8 +72,8 @@ public class RestaurantActivity extends AppCompatActivity{
             @Override
             public void onClick(View v){
                 File imageFile = new File("image", imageUrl);
-                ptFile = getPhotoFileUri(imageUrl);
-                saveRestaurant(url, ParseUser.getCurrentUser(), ptFile);
+                ParseFile image = new ParseFile(imageFile, "image.jpeg");
+                saveRestaurant(url, ParseUser.getCurrentUser(), imageUrl, restaurantName);
                 goMainFragment();
             }
         });
@@ -80,11 +83,12 @@ public class RestaurantActivity extends AppCompatActivity{
         startActivity(intent);
         finish();
     }
-    private void saveRestaurant(String description, ParseUser currentUser, File photoFile) {
+    private void saveRestaurant(String description, ParseUser currentUser, String image, String name) {
         Restaurant restaurant = new Restaurant();
         restaurant.setDescription(description);
-        restaurant.setImage(new ParseFile(photoFile));
+        restaurant.setImage(image);
         restaurant.setUser(currentUser);
+        restaurant.setName(name);
         restaurant.saveInBackground(new SaveCallback() {
             @Override
             public void done(ParseException e) {
@@ -96,18 +100,5 @@ public class RestaurantActivity extends AppCompatActivity{
             }
         });
     }
-    public File getPhotoFileUri(String fileName) {
-        // Get safe storage directory for photos
-        // Use `getExternalFilesDir` on Context to access package-specific directories.
-        // This way, we don't need to request external read/write runtime permissions.
-        File mediaStorageDir = new File(this.getExternalFilesDir(Environment.DIRECTORY_PICTURES), "TAG");
 
-        // Create the storage directory if it does not exist
-        if (!mediaStorageDir.exists() && !mediaStorageDir.mkdirs()){
-           Log.d("TAG", "failed to create directory");
-        }
-
-        // Return the file target for the photo based on filename
-        return new File(mediaStorageDir.getPath() + File.separator + fileName);
-    }
 }

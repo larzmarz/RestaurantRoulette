@@ -9,6 +9,7 @@
         <entry key="app/src/main/res/drawable/ic_baseline_person_24.xml" value="0.353" />
         <entry key="app/src/main/res/drawable/ic_baseline_watch_later_24.xml" value="0.353" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.122" />
+        <entry key="app/src/main/res/layout/activity_individualrestaurant.xml" value="0.22592592592592592" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.4669208667896412" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.2386058981233244" />
         <entry key="app/src/main/res/layout/activity_restaurant.xml" value="0.3876388549804688" />
@@ -18,7 +19,7 @@
         <entry key="app/src/main/res/layout/fragment_history.xml" value="0.4036458333333333" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.4876779048400518" />
         <entry key="app/src/main/res/layout/fragment_user.xml" value="0.45994720458984384" />
-        <entry key="app/src/main/res/layout/item_restaurant.xml" value="0.3875" />
+        <entry key="app/src/main/res/layout/item_restaurant.xml" value="0.55" />
         <entry key="app/src/main/res/menu/menu_bottom_navigation.xml" value="0.4036458333333333" />
         <entry key="app/src/main/res/xml/fileprovider.xml" value="0.209375" />
       </map>

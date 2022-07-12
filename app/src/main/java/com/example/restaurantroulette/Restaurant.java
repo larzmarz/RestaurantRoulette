@@ -18,6 +18,7 @@ public class Restaurant extends ParseObject{
     public static final String KEY_USER = "user";
     public static final String KEY_CREATED_KEY = "createdAt";
 
+
     public ParseUser getUser(){
         return getParseUser(KEY_USER);
     }
@@ -35,8 +36,8 @@ public class Restaurant extends ParseObject{
     public ParseFile getImage() {
         return getParseFile(KEY_IMAGE);
     }
-    public void setImage(ParseFile parseFile) {
-        put(KEY_IMAGE, parseFile);
+    public void setImage(String imageUrl) {
+        put(KEY_IMAGE, imageUrl);
     }
     public String getCreated(){
         return getString(KEY_CREATED_KEY);
