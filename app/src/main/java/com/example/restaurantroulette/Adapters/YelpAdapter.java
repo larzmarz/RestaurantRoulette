@@ -17,6 +17,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
+import com.bumptech.glide.request.RequestOptions;
 import com.example.restaurantroulette.R;
 import com.example.restaurantroulette.Restaurant;
 import com.example.restaurantroulette.Yelp;
@@ -81,6 +82,8 @@ public class YelpAdapter extends RecyclerView.Adapter<YelpAdapter.ViewHolder> {
 
                 Glide.with(context)
                         .load(restaurant.getImage())
+                        .placeholder(R.drawable.orange_splash)
+                        .apply(new RequestOptions().override(500, 500))
                         .into(ivRestPicsURL);
                 //this will be for the detail view of the restaurant
                 itemView.setOnClickListener(new View.OnClickListener() {

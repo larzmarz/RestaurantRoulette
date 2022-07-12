@@ -33,8 +33,8 @@ public class Restaurant extends ParseObject{
     public void setDescription(String description){
         put(KEY_DESCRIPTION, description);
     }
-    public ParseFile getImage() {
-        return getParseFile(KEY_IMAGE);
+    public String getImage() {
+        return getString(KEY_IMAGE);
     }
     public void setImage(String imageUrl) {
         put(KEY_IMAGE, imageUrl);

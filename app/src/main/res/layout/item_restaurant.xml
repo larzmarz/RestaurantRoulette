@@ -7,8 +7,8 @@
 
     <ImageView
         android:id="@+id/ivRestPic"
-        android:layout_width="180dp"
-        android:layout_height="158dp"
+        android:layout_width="139dp"
+        android:layout_height="148dp"
         android:layout_marginTop="32dp"
         android:scaleType="centerCrop"
         app:layout_constraintEnd_toEndOf="parent"
@@ -19,13 +19,14 @@
 
     <TextView
         android:id="@+id/tvRestName"
-        android:layout_width="wrap_content"
+        android:layout_width="237dp"
         android:layout_height="33dp"
         android:layout_marginStart="4dp"
         android:layout_marginTop="32dp"
         android:fontFamily="monospace"
         android:text="Name"
-        android:textSize="23sp"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
         app:layout_constraintStart_toEndOf="@+id/ivRestPic"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -33,20 +34,21 @@
         android:id="@+id/tvDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
         android:fontFamily="sans-serif-light"
         android:text="date"
+        android:textColor="@color/white"
         android:textSize="10sp"
         app:layout_constraintBottom_toTopOf="@+id/ivRestPic"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="@+id/ivRestPic" />
 
     <TextView
         android:id="@+id/tvYelpUrl"
-        android:layout_width="wrap_content"
+        android:layout_width="236dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
-        android:layout_marginTop="108dp"
+        android:layout_marginTop="76dp"
         android:text="Yelp"
+        android:textColor="@color/white"
         android:textSize="12sp"
         app:layout_constraintStart_toEndOf="@+id/ivRestPic"
         app:layout_constraintTop_toBottomOf="@+id/tvRestName" />
