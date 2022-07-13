@@ -32,10 +32,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_home, container, false);
         etZipCode = view.findViewById(R.id.etZipCode);
-        //zipCode = Integer.parseInt(etZipCode.getText().toString());
+        // zipCode = Integer.parseInt(etZipCode.getText().toString());
         btStart = view.findViewById(R.id.btStartSearch);
-        //when the user clicks the start button
-
+        // when the user clicks the start button
         btStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -43,8 +42,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
                 if (etZipCode.getText().toString().isEmpty()){
                     Toast.makeText(getContext(), "Enter your Zip Code", Toast.LENGTH_SHORT).show();
                 }else{
-                    Toast.makeText(getContext(), "Let the adventure begin", Toast.LENGTH_SHORT).show();
-                    //this zip code is what will go into the yelp location section
+                    // this zip code is what will go into the yelp location section
                     zipCode = etZipCode.getText().toString();
                     Log.i("hello", "onClick: " + zipCode);
                     goSearchPage();
@@ -56,13 +54,13 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstances) {
         super.onViewCreated(view, savedInstances);
     }
-    //redirects user to page where they will search for a restaurant
+    // redirects user to page where they will search for a restaurant
     private void goSearchPage() {
         Intent i = new Intent(getActivity(), SearchPageActivity.class);
         i.putExtra("zip", zipCode);
         startActivity(i);
     }
-    //empty method for implementation of view.onclicklistener
+    // empty method for implementation of view.onclicklistener
     @Override
     public void onClick(View v) {}
     public String getZip(){

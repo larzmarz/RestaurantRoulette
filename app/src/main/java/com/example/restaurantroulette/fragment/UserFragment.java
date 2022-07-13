@@ -68,11 +68,14 @@ public class UserFragment extends BaseFragment implements View.OnClickListener{
     }
     public void displayUserInfo(){
         tvUsername.setText(user.getUsername());
-        //TODO: make sure this is the right setter
+        // TODO: make sure this is the right setter
         tvDescription.setText((CharSequence) user.getDescription());
         ParseFile profilePhoto = user.getProfilePhoto();
         if (profilePhoto != null){
-            Glide.with(getContext()).load(user.getProfilePhoto().getUrl()).circleCrop().into(ivProfilePhoto);
+            Glide.with(getContext())
+                .load(user.getProfilePhoto().getUrl())
+                .circleCrop().
+                into(ivProfilePhoto);
         }else {
             Toast.makeText(getContext(), "Profile Photo does not exist for " + user.getUsername(), Toast.LENGTH_SHORT).show();
         }
@@ -86,7 +89,10 @@ public class UserFragment extends BaseFragment implements View.OnClickListener{
                 Bitmap takenImage = BitmapFactory.decodeFile(photoFile.getAbsolutePath());
                 // RESIZE BITMAP, see section below
                 // Load the taken image into a preview
-                Glide.with(getContext()).load(takenImage).circleCrop().into(ivProfilePhoto);
+                Glide.with(getContext())
+                    .load(takenImage)
+                    .circleCrop()
+                    .into(ivProfilePhoto);
                 user.setProfilePhoto(new ParseFile(photoFile));
                 user.saveInBackground();
             } else { // Result was a failure

@@ -9,10 +9,11 @@
 
     <ImageView
         android:id="@+id/ivRestaurantPicture"
-        android:layout_width="167dp"
-        android:layout_height="165dp"
-        android:layout_marginTop="145dp"
+        android:layout_width="274dp"
+        android:layout_height="255dp"
+        android:layout_marginTop="96dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.547"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:srcCompat="@tools:sample/avatars" />
@@ -36,6 +37,7 @@
         android:layout_height="30dp"
         android:layout_marginStart="100dp"
         android:layout_marginTop="76dp"
+        android:background="#4CAF50"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvRestaurantDetails"
         app:srcCompat="@android:drawable/checkbox_on_background" />
@@ -45,6 +47,7 @@
         android:layout_width="76dp"
         android:layout_height="28dp"
         android:layout_marginStart="56dp"
+        android:background="#FF0000"
         app:layout_constraintBottom_toBottomOf="@+id/ibYes"
         app:layout_constraintStart_toEndOf="@+id/ibYes"
         app:srcCompat="@android:drawable/ic_notification_clear_all" />

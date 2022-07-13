@@ -1,8 +1,6 @@
 package com.example.restaurantroulette.Adapters;
 
 import android.content.Context;
-import android.content.Intent;
-import android.content.res.Configuration;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,13 +14,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.restaurantroulette.R;
 import com.example.restaurantroulette.Restaurant;
-import com.example.restaurantroulette.Yelp;
-
-import org.parceler.Parcels;
 
 import java.util.List;
 
@@ -50,9 +44,9 @@ public class YelpAdapter extends RecyclerView.Adapter<YelpAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Log.d("YelpAdapter", "onBindViewHolder" + position);
-        //Get the restaurant at the position
+        // Get the restaurant at the position
         Restaurant res = restaurants.get(position);
-        //Bind restaurant data into the VH
+        // Bind restaurant data into the VH
         holder.bind(res);
     }
     @Override
@@ -81,7 +75,7 @@ public class YelpAdapter extends RecyclerView.Adapter<YelpAdapter.ViewHolder> {
                 .placeholder(R.drawable.orange_splash)
                 .apply(new RequestOptions().override(500, 500))
                 .into(ivRestPicsURL);
-            //this will be for the detail view of the restaurant
+            // this will be for the detail view of the restaurant
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -89,7 +83,7 @@ public class YelpAdapter extends RecyclerView.Adapter<YelpAdapter.ViewHolder> {
                 }
             });
         }
-        //required empty Onclick for implementation of View.OnClickListener
+        // required empty Onclick for implementation of View.OnClickListener
         @Override
         public void onClick(View v) {
         }

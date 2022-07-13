@@ -49,7 +49,7 @@ public class SearchPageActivity extends AppCompatActivity implements AdapterView
     String[] ratingString;
     JSONObject businessName;
 
-    //redirect to the specific api request I need
+    // redirect to the specific api request I need
     public static final String BUSINESS_INFO = "https://api.yelp.com/v3/businesses/search";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,7 +62,7 @@ public class SearchPageActivity extends AppCompatActivity implements AdapterView
         spRating = findViewById(R.id.spRating);
         btSurpriseMe = findViewById(R.id.btSurpriseMe);
         btSurpriseMe.setOnClickListener(new View.OnClickListener() {
-            //here is where the restaurant will be completely randomized
+            // here is where the restaurant will be completely randomized
             @Override
             public void onClick(View v) {
                 goSurpriseRestaurantPage();
@@ -85,23 +85,21 @@ public class SearchPageActivity extends AppCompatActivity implements AdapterView
         filteredRating = new ArrayList<String>();
         filteredPrice = new ArrayList<String>();
 
-        //calling Yelp API commands
+        // calling Yelp API commands
         AsyncHttpClient client = new AsyncHttpClient();
         RequestHeaders headers = new RequestHeaders();
         headers.put("Authorization", getString(R.string.yelp_key));
-        //whatever follows the "?location=" is the user's location
-        //debugger shows what happens in action and the data collected by the API
-        //TODO: get zipcode input from the search page
+        // whatever follows the "?location=" is the user's location
+        // debugger shows what happens in action and the data collected by the API
+        // TODO: get zipcode input from the search page
         int zip_int = Integer.parseInt(zipcode);
         String location = "?location=" + zip_int;
         client.get(BUSINESS_INFO + location, headers, null, new JsonHttpResponseHandler() {
-
-
             @Override
             public void onSuccess(int statusCode, Headers headers, JSON json){
                 Log.i("test", "");
                 try {
-                    //for testing reasons, gets first restaurant
+                    // for testing reasons, gets first restaurant
                     JSONArray businesses = json.jsonObject.getJSONArray("businesses");
                     for(int i = 0; i < businesses.length(); i++){
                         //adding all the values of the restaurants given to the app through json into their respective arrays
@@ -114,9 +112,8 @@ public class SearchPageActivity extends AppCompatActivity implements AdapterView
                         //go into the categories to get the correct aliases
                         //TODO: see why it interferes with the program above and stops the for loop
                         //AddToCategoryAliasArray(objectBusiness.getJSONObject("categories").getString("alias"));
-
                     }
-                    //price String array set up
+                    // price String array set up
                 }catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -126,12 +123,12 @@ public class SearchPageActivity extends AppCompatActivity implements AdapterView
                 Log.i("fail", "");
             }
         });
-        //setting the spinners, testing variables, not real options
+        // setting the spinners, testing variables, not real options
         String[] mileRadius = getResources().getStringArray(R.array.mile_radius);
         String[] priceRange = getResources().getStringArray(R.array.price_range);
 
-        //TODO: make the string array priceString & ratingString successfully link below
-        //priceString crashes the app
+        // TODO: make the string array priceString & ratingString successfully link below
+        // priceString crashes the app
         ArrayAdapter<String> adapter1 = new ArrayAdapter(this, android.R.layout.simple_spinner_item, filteredPrice);
         ArrayAdapter<String> adapter3 = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_spinner_item, filteredRating);
         adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -139,13 +136,14 @@ public class SearchPageActivity extends AppCompatActivity implements AdapterView
         spPriceRange.setAdapter(adapter1);
         spRating.setAdapter(adapter3);
 
-        //these are the user's responses
-        String priceResponse = spPriceRange.getSelectedItem().toString();
-        String priceRating = spRating.getSelectedItem().toString();
+        // these are the user's responses
+        // TODO: see why they are causing the app to crash
+//        String priceResponse = spPriceRange.getSelectedItem().toString();
+//        String priceRating = spRating.getSelectedItem().toString();
 
     }
 
-    //storing the different strings to then compare their values
+    // storing the different strings to then compare their values
     private void AddToCategoryAliasArray(String al){
         if (!categoriesAlias.contains(al)) {
             categoriesAlias.add(al);
@@ -155,7 +153,7 @@ public class SearchPageActivity extends AppCompatActivity implements AdapterView
     private void AddToArrayOfPrice(String p){price.add(p); filteredPriceMethod(p);}
     private void AddToArrayOfRating(Double r){rating.add(r); filteredRatingMethod(r);}
 
-    //TODO: sort all the values to then throw the options back at the spinners
+    // TODO: sort all the values to then throw the options back at the spinners
     private void filteredRatingMethod(Double r) {
         if (r >= 1 && r < 2){
             if (!filteredRating.contains("1+")){
@@ -205,9 +203,7 @@ public class SearchPageActivity extends AppCompatActivity implements AdapterView
             }
         }
 }
-
-
-    //adds alias if it's not a repeat
+    // adds alias if it's not a repeat
     private void AddToArrayOfName(String a){
         if (!name.contains(a)) {
             name.add(a);
@@ -219,7 +215,6 @@ public class SearchPageActivity extends AppCompatActivity implements AdapterView
 //    private void AddToArrayOfPhone(String p){
 //        phone.add(p);
 //    }
-
     private void goRestaurantPage(){
         Intent i = new Intent(SearchPageActivity.this, RestaurantActivity.class);
         startActivity(i);

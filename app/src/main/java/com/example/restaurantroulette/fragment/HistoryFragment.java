@@ -30,7 +30,7 @@ public class HistoryFragment extends Fragment {
     protected YelpAdapter adapter;
     protected List<Restaurant> allRestaurants;
     public static final String TAG = "History Fragment";
-    //required empty constructor
+    // required empty constructor
     public HistoryFragment(){}
 
     @Override
@@ -48,7 +48,7 @@ public class HistoryFragment extends Fragment {
         rvPlaces.setLayoutManager(new LinearLayoutManager(getContext()));
         swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
-            //refresh implementation
+            // refresh implementation
             public void onRefresh() {
                 adapter.clear();
                 queryRestaurants();

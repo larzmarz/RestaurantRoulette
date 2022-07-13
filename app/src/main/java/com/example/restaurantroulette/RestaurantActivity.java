@@ -63,17 +63,21 @@ public class RestaurantActivity extends AppCompatActivity{
         String imageUrl = intent.getStringExtra("image_url");
         String url = intent.getStringExtra("url");
         Glide.with((Context) this)
-                .load(imageUrl)
-                .placeholder(R.drawable.tempbackgroundsearch)
-                .into(ivRestaurantPicture);
+            .load(imageUrl)
+            .placeholder(R.drawable.tempbackgroundsearch)
+            .into(ivRestaurantPicture);
         tvRestaurantDetails.setText(restaurantName);
         tvUrl.setText(url);
         ibYes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
-                File imageFile = new File("image", imageUrl);
-                ParseFile image = new ParseFile(imageFile, "image.jpeg");
                 saveRestaurant(url, ParseUser.getCurrentUser(), imageUrl, restaurantName);
+                goMainFragment();
+            }
+        });
+        ibNo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
                 goMainFragment();
             }
         });
