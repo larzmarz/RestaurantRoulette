@@ -43,6 +43,8 @@ public class SearchPageActivity extends AppCompatActivity implements AdapterView
     ArrayList<String> imageUrl;
     ArrayList<String> phone;
     ArrayList<String> url;
+    ArrayList<String> filteredRating;
+    ArrayList<String> filteredPrice;
     String[] priceString;
     String[] ratingString;
     JSONObject businessName;
@@ -80,18 +82,19 @@ public class SearchPageActivity extends AppCompatActivity implements AdapterView
         categoriesAlias = new ArrayList<String>();
         imageUrl = new ArrayList<String>();
         url = new ArrayList<String>();
+        filteredRating = new ArrayList<String>();
+        filteredPrice = new ArrayList<String>();
 
         //calling Yelp API commands
         AsyncHttpClient client = new AsyncHttpClient();
         RequestHeaders headers = new RequestHeaders();
-        //TODO: Hide API Key
-        headers.put("Authorization", "Bearer 9r3kos1OAvsDBYAPSPskzt-Yu6qIbcaVsBIAS_BznnDOEoTesIHTU_hoojwl4yih23D0K0RNfdnALn24KdyquMsFiuv12mWiI2ag7zVVRhBMRdmQBWWeNzoKrjayYnYx");
+        headers.put("Authorization", getString(R.string.yelp_key));
         //whatever follows the "?location=" is the user's location
         //debugger shows what happens in action and the data collected by the API
         //TODO: get zipcode input from the search page
-        String location = "?location=" + zipcode;
-        Toast.makeText(this, "zip is" + zipcode, Toast.LENGTH_SHORT).show();
-        client.get(BUSINESS_INFO + "?location=98101", headers, null, new JsonHttpResponseHandler() {
+        int zip_int = Integer.parseInt(zipcode);
+        String location = "?location=" + zip_int;
+        client.get(BUSINESS_INFO + location, headers, null, new JsonHttpResponseHandler() {
 
 
             @Override
@@ -108,57 +111,12 @@ public class SearchPageActivity extends AppCompatActivity implements AdapterView
                         AddToArrayOfPrice(objectBusiness.getString("price"));
                         AddToArrayOfImageUrl(objectBusiness.getString("image_url"));
                         AddToArrayOfUrl(objectBusiness.getString("url"));
-//                      AddToArrayOfPhone(objectBusiness.getString("phone"));
                         //go into the categories to get the correct aliases
                         //TODO: see why it interferes with the program above and stops the for loop
                         //AddToCategoryAliasArray(objectBusiness.getJSONObject("categories").getString("alias"));
+
                     }
                     //price String array set up
-                    if(price.contains("$") && price.contains("$$") && price.contains("$$$") && price.contains("$$$$")){
-                        priceString = new String[]{"$", "$$", "$$$", "$$$$"};
-                    }else if(!price.contains("$") && price.contains("$$") && price.contains("$$$") && price.contains("$$$$")){
-                        priceString = new String[]{"$$", "$$$", "$$$$"};
-                    }else if(!price.contains("$") && !price.contains("$$") && price.contains("$$$") && price.contains("$$$$")){
-                        priceString = new String[]{"$$$", "$$$$"};
-                    }else if(!price.contains("$") && !price.contains("$$") && !price.contains("$$$") && price.contains("$$$$")){
-                        priceString = new String[]{"$$$$"};
-                    }else if(price.contains("$") && !price.contains("$$") && price.contains("$$$") && !price.contains("$$$$")){
-                        priceString = new String[]{"$", "$$$"};
-                    }else if(price.contains("$") && price.contains("$$") && !price.contains("$$$") && !price.contains("$$$$")){
-                        priceString = new String[]{"$", "$$"};
-                    }else if(price.contains("$") && price.contains("$$") && price.contains("$$$") && !price.contains("$$$$")){
-                        priceString = new String[]{"$", "$$", "$$$"};
-                    }else if(!price.contains("$") && price.contains("$$") && !price.contains("$$$") && !price.contains("$$$$")){
-                        priceString = new String[]{"$$"};
-                    }else if(!price.contains("$") && price.contains("$$") && price.contains("$$$") && !price.contains("$$$$")){
-                        priceString = new String[]{"$$", "$$$"};
-                    }else if(!price.contains("$") && !price.contains("$$") && price.contains("$$$") && !price.contains("$$$$")){
-                        priceString = new String[]{"$$$"};
-                    }else if(price.contains("$") && !price.contains("$$") && price.contains("$$$") && price.contains("$$$$")){
-                        priceString = new String[]{"$", "$$$", "$$$$"};
-                    }else if(price.contains("$") && !price.contains("$$") && !price.contains("$$$") && price.contains("$$$$")){
-                        priceString = new String[]{"$", "$$$$"};
-                    }else if(price.contains("$") && price.contains("$$") && !price.contains("$$$") && price.contains("$$$$")){
-                        priceString = new String[]{"$", "$$", "$$$$"};
-                    }else if(!price.contains("$") && price.contains("$$") && !price.contains("$$$") && price.contains("$$$$")){
-                        priceString = new String[]{"$$", "$$$$"};
-                    }else if(price.contains("$") && !price.contains("$$") && !price.contains("$$$") && !price.contains("$$$$")){
-                        priceString = new String[]{"$"};
-                    }
-
-                    //rating string array set up
-                    if(rating.contains("1")){
-                        ratingString = new String[]{"1"};
-                    }else if(rating.contains("2")){
-                        ratingString = new String[]{"2"};
-                    }else if(rating.contains("3")){
-                        ratingString = new String[]{"3"};
-                    }else if(rating.contains("4")){
-                        ratingString = new String[]{"4"};
-                    }else if(rating.contains("5")){
-                        ratingString = new String[]{"5"};
-                    }
-
                 }catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -170,34 +128,88 @@ public class SearchPageActivity extends AppCompatActivity implements AdapterView
         });
         //setting the spinners, testing variables, not real options
         String[] mileRadius = getResources().getStringArray(R.array.mile_radius);
-        String[] rating = getResources().getStringArray(R.array.rating);
         String[] priceRange = getResources().getStringArray(R.array.price_range);
 
         //TODO: make the string array priceString & ratingString successfully link below
         //priceString crashes the app
-        ArrayAdapter adapter1 = new ArrayAdapter(this, android.R.layout.simple_spinner_item, priceRange);
-        //ArrayAdapter adapter2 = new ArrayAdapter(this, android.R.layout.simple_spinner_item, mileRadius);
-        ArrayAdapter adapter3 = new ArrayAdapter(this, android.R.layout.simple_spinner_item, rating);
+        ArrayAdapter<String> adapter1 = new ArrayAdapter(this, android.R.layout.simple_spinner_item, filteredPrice);
+        ArrayAdapter<String> adapter3 = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_spinner_item, filteredRating);
         adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        //adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         adapter3.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spPriceRange.setAdapter(adapter1);
         spRating.setAdapter(adapter3);
-    }
 
+        //these are the user's responses
+        String priceResponse = spPriceRange.getSelectedItem().toString();
+        String priceRating = spRating.getSelectedItem().toString();
+
+    }
 
     //storing the different strings to then compare their values
     private void AddToCategoryAliasArray(String al){
-        if(!categoriesAlias.contains(al)) {
+        if (!categoriesAlias.contains(al)) {
             categoriesAlias.add(al);
         }
     }
     private void AddToArrayOfImageUrl(String url){imageUrl.add(url);}
-    private void AddToArrayOfPrice(String p){price.add(p);}
-    private void AddToArrayOfRating(Double r){rating.add(r);}
+    private void AddToArrayOfPrice(String p){price.add(p); filteredPriceMethod(p);}
+    private void AddToArrayOfRating(Double r){rating.add(r); filteredRatingMethod(r);}
+
+    //TODO: sort all the values to then throw the options back at the spinners
+    private void filteredRatingMethod(Double r) {
+        if (r >= 1 && r < 2){
+            if (!filteredRating.contains("1+")){
+                filteredRating.add("1+");
+            }
+        }
+        if (r >= 2 && r < 3){
+            if (!filteredRating.contains("2+")){
+                filteredRating.add("2+");
+            }
+        }
+        if (r >= 3 && r < 4){
+            if (!filteredRating.contains("3+")){
+                filteredRating.add("3+");
+            }
+        }
+        if (r >= 4 && r < 5){
+            if (!filteredRating.contains("4+")){
+                filteredRating.add("4+");
+            }
+        }
+        if (r == 5){
+            if (!filteredRating.contains("5")){
+                filteredRating.add("5");
+            }
+        }
+    }
+    private void filteredPriceMethod(String p) {
+        if (p.equals("$")){
+            if (!filteredPrice.contains("$")){
+                filteredPrice.add("$");
+            }
+        }
+        if (p.equals("$$")){
+            if (!filteredPrice.contains("$$")){
+                filteredPrice.add("$$");
+            }
+        }
+        if (p.equals("$$$")){
+            if (!filteredPrice.contains("$$$")){
+                filteredPrice.add("$$$");
+            }
+        }
+        if (p.equals("$$$$")){
+            if (!filteredPrice.contains("$$$$")){
+                filteredPrice.add("$$$$");
+            }
+        }
+}
+
+
     //adds alias if it's not a repeat
     private void AddToArrayOfName(String a){
-        if(!name.contains(a)) {
+        if (!name.contains(a)) {
             name.add(a);
         }
     }
@@ -207,18 +219,6 @@ public class SearchPageActivity extends AppCompatActivity implements AdapterView
 //    private void AddToArrayOfPhone(String p){
 //        phone.add(p);
 //    }
-    //TODO: sort all the values to then throw the options back at the spinners
-    //booleans for rating
-    public boolean RatingSign1(JSONObject jsonObject) throws JSONException {
-        if(jsonObject.getJSONArray("rating").equals("1")){return true;}return false;}
-    public boolean RatingSign2(JSONObject jsonObject) throws JSONException {
-        if(jsonObject.getJSONArray("rating").equals("2")){return true;}return false;}
-    public boolean RatingSign3(JSONObject jsonObject) throws JSONException {
-        if(jsonObject.getJSONArray("rating").equals("3")){return true;}return false;}
-    public boolean RatingSign4(JSONObject jsonObject) throws JSONException {
-        if(jsonObject.getJSONArray("rating").equals("4")){return true;}return false;}
-    public boolean RatingSign5(JSONObject jsonObject) throws JSONException {
-        if(jsonObject.getJSONArray("rating").equals("5")){return true;}return false;}
 
     private void goRestaurantPage(){
         Intent i = new Intent(SearchPageActivity.this, RestaurantActivity.class);

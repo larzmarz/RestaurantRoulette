@@ -20,13 +20,13 @@
     <TextView
         android:id="@+id/tvRestName"
         android:layout_width="237dp"
-        android:layout_height="33dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
         android:layout_marginTop="32dp"
         android:fontFamily="monospace"
         android:text="Name"
         android:textColor="#FFFFFF"
-        android:textSize="18sp"
+        android:textSize="16sp"
         app:layout_constraintStart_toEndOf="@+id/ivRestPic"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -46,7 +46,8 @@
         android:layout_width="236dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
-        android:layout_marginTop="76dp"
+        android:layout_marginTop="44dp"
+        android:linksClickable="true"
         android:text="Yelp"
         android:textColor="@color/white"
         android:textSize="12sp"

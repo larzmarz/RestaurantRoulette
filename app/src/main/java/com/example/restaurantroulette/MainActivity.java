@@ -36,17 +36,14 @@ public class MainActivity extends AppCompatActivity {
                     //assigns fragments to their respective xmls
                     //home fragment
                     case R.id.action_home:
-                        //Toast.makeText(MainActivity.this, "Home screen button works!", Toast.LENGTH_SHORT).show();
                         fragment = homeFragment;
                         break;
                     //user fragment
                     case R.id.action_user:
-                        //Toast.makeText(MainActivity.this, "User button works!", Toast.LENGTH_SHORT).show();
                         fragment = userFragment;
                         break;
                     //history fragment
                     case R.id.action_history:
-                        //Toast.makeText(MainActivity.this, "History screen button works!", Toast.LENGTH_SHORT).show();
                     default:
                         fragment =historyfragment;
                          break;

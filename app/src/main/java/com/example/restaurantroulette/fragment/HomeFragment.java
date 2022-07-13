@@ -36,18 +36,11 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
         btStart = view.findViewById(R.id.btStartSearch);
         //when the user clicks the start button
 
-        //TODO: See why there is an error in line 41
-        /*spLocation = view.findViewById(R.id.spMileRadius);
-        String[] mileRadius = getResources().getStringArray(R.array.mile_radius);
-        ArrayAdapter adapter2 = new ArrayAdapter(HomeFragment.this, android.R.layout.simple_spinner_item, mileRadius);
-        adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spLocation.setAdapter(adapter2);*/
-
         btStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //TODO: Set limits on zip codes so they don't exceed 5 digits, note: some zipcodes start with two zeros
-                if(etZipCode.getText().toString().isEmpty()){
+                if (etZipCode.getText().toString().isEmpty()){
                     Toast.makeText(getContext(), "Enter your Zip Code", Toast.LENGTH_SHORT).show();
                 }else{
                     Toast.makeText(getContext(), "Let the adventure begin", Toast.LENGTH_SHORT).show();

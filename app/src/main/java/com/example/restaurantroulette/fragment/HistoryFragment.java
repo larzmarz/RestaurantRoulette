@@ -63,11 +63,11 @@ public class HistoryFragment extends Fragment {
         query.findInBackground(new FindCallback<Restaurant>() {
             @Override
             public void done(List<Restaurant> rests, ParseException e) {
-                if(e != null){
+                if (e != null){
                     Log.i(TAG, "Issues with getting restaurants", e);
                     return;
                 }
-                for(Restaurant rest : rests){
+                for (Restaurant rest : rests){
                     Log.i(TAG, "Restaurant: " + rest.getName() + ",username: " + rest.getUser().getUsername());
                 }
                 allRestaurants.addAll(rests);

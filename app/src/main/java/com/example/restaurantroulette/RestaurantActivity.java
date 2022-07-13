@@ -64,7 +64,7 @@ public class RestaurantActivity extends AppCompatActivity{
         String url = intent.getStringExtra("url");
         Glide.with((Context) this)
                 .load(imageUrl)
-                .placeholder(R.drawable.orange_splash)
+                .placeholder(R.drawable.tempbackgroundsearch)
                 .into(ivRestaurantPicture);
         tvRestaurantDetails.setText(restaurantName);
         tvUrl.setText(url);
@@ -92,7 +92,7 @@ public class RestaurantActivity extends AppCompatActivity{
         restaurant.saveInBackground(new SaveCallback() {
             @Override
             public void done(ParseException e) {
-                if(e != null){
+                if (e != null){
                     Log.e("TAG", "Error while saving", e);
                 }else {
                     Log.i("TAG", "Post save was successful!");

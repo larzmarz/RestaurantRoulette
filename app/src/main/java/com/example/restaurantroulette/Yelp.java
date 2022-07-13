@@ -8,6 +8,7 @@ import org.parceler.Parcel;
 import java.util.ArrayList;
 import java.util.List;
 
+//TODO: scan entire project to make sure deleting this class does not break anything
 @Parcel
 public class Yelp {
     public String locationZip;
@@ -20,9 +21,6 @@ public class Yelp {
     public String alias;
     String posterPath;
 
-    //empty for Parcel
-    public Yelp(){
-    }
     public static Yelp fromJson(JSONObject jsonObject) throws JSONException{
         Yelp yelp = new Yelp();
         yelp.locationZip = jsonObject.getString("location.zip_code");

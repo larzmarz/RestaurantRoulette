@@ -37,9 +37,9 @@ public class SignUpActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //if all the fields are filled out
-                if(!etUsernameSU.getText().toString().isEmpty() && !etPasswordSU.getText().toString().isEmpty() && !etFullNameSU.getText().toString().isEmpty() && !etPwdRetypeSU.getText().toString().isEmpty()){
+                if (!etUsernameSU.getText().toString().isEmpty() && !etPasswordSU.getText().toString().isEmpty() && !etFullNameSU.getText().toString().isEmpty() && !etPwdRetypeSU.getText().toString().isEmpty()){
                     //if the passwords match
-                    if(etPasswordSU.getText().toString().equals(etPwdRetypeSU.getText().toString())){
+                    if (etPasswordSU.getText().toString().equals(etPwdRetypeSU.getText().toString())){
                         ParseUser user = new ParseUser();
                         user.setUsername(etUsernameSU.getText().toString());
                         user.setPassword(etPasswordSU.getText().toString());
@@ -56,11 +56,11 @@ public class SignUpActivity extends AppCompatActivity {
                             }
                         });
                     //if the passwords don't match
-                    }else{
+                    }else {
                         Toast.makeText(SignUpActivity.this, "Passwords do not match!", Toast.LENGTH_SHORT).show();
                     }
                 //if any field is empty
-                }else{
+                }else {
                     Toast.makeText(SignUpActivity.this, "Fill out all fields", Toast.LENGTH_SHORT).show();
                 }
             }

@@ -71,7 +71,7 @@ public class UserFragment extends BaseFragment implements View.OnClickListener{
         //TODO: make sure this is the right setter
         tvDescription.setText((CharSequence) user.getDescription());
         ParseFile profilePhoto = user.getProfilePhoto();
-        if(profilePhoto != null){
+        if (profilePhoto != null){
             Glide.with(getContext()).load(user.getProfilePhoto().getUrl()).circleCrop().into(ivProfilePhoto);
         }else {
             Toast.makeText(getContext(), "Profile Photo does not exist for " + user.getUsername(), Toast.LENGTH_SHORT).show();
