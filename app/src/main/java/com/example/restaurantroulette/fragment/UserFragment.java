@@ -24,6 +24,7 @@ import com.example.restaurantroulette.LoginActivity;
 import com.example.restaurantroulette.R;
 import com.example.restaurantroulette.User;
 import com.parse.GetCallback;
+import com.parse.Parse;
 import com.parse.ParseException;
 import com.parse.ParseFile;
 import com.parse.ParseObject;
@@ -63,6 +64,12 @@ public class UserFragment extends BaseFragment implements View.OnClickListener{
             public void done(ParseObject object, ParseException e) {
                 user = (User) object;
                 displayUserInfo();
+            }
+        });
+        //TODO: fix this, previous code crashed app
+        btLogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
             }
         });
     }

@@ -1,6 +1,7 @@
 package com.example.restaurantroulette.Adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +18,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.restaurantroulette.R;
 import com.example.restaurantroulette.Restaurant;
+import com.example.restaurantroulette.RestaurantDetailsActivity;
 
 import java.util.List;
 
@@ -80,6 +82,9 @@ public class YelpAdapter extends RecyclerView.Adapter<YelpAdapter.ViewHolder> {
                 @Override
                 public void onClick(View v) {
                     Toast.makeText(context, "In progress", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(context, RestaurantDetailsActivity.class);
+                    intent.putExtra(RestaurantDetailsActivity.RESTAURANT_KEY, restaurant);
+                    context.startActivity(intent);
                 }
             });
         }
