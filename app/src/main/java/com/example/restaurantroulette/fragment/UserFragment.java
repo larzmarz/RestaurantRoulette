@@ -67,11 +67,11 @@ public class UserFragment extends BaseFragment implements View.OnClickListener{
             }
         });
         //TODO: fix this, previous code crashed app
-        btLogout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-            }
-        });
+//        btLogout.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//            }
+//        });
     }
     public void displayUserInfo(){
         tvUsername.setText(user.getUsername());

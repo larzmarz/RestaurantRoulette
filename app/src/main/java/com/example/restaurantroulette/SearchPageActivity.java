@@ -45,9 +45,6 @@ public class SearchPageActivity extends AppCompatActivity implements AdapterView
     ArrayList<String> url;
     ArrayList<String> filteredRating;
     ArrayList<String> filteredPrice;
-    String[] priceString;
-    String[] ratingString;
-    JSONObject businessName;
 
     // redirect to the specific api request I need
     public static final String BUSINESS_INFO = "https://api.yelp.com/v3/businesses/search";
@@ -57,8 +54,8 @@ public class SearchPageActivity extends AppCompatActivity implements AdapterView
         setContentView(R.layout.activity_search_page);
         Intent intent = getIntent();
         String zipcode = intent.getStringExtra("zip");
+        String mileRadius = intent.getStringExtra("radius");
         spPriceRange = findViewById(R.id.spPriceRange);
-        spLocation = findViewById(R.id.spMileRadius);
         spRating = findViewById(R.id.spRating);
         btSurpriseMe = findViewById(R.id.btSurpriseMe);
         btSurpriseMe.setOnClickListener(new View.OnClickListener() {
@@ -93,8 +90,15 @@ public class SearchPageActivity extends AppCompatActivity implements AdapterView
         // debugger shows what happens in action and the data collected by the API
         // TODO: get zipcode input from the search page
         int zip_int = Integer.parseInt(zipcode);
+        int radius_int = Integer.parseInt(mileRadius);
+        if(radius_int == 0){
+            radius_int = 1609 * 20;
+        }else if(radius_int > 0){
+            radius_int *= 1609;
+        }
         String location = "?location=" + zip_int;
-        client.get(BUSINESS_INFO + location, headers, null, new JsonHttpResponseHandler() {
+        String radius = "&radius=" + radius_int;
+        client.get(BUSINESS_INFO + location + radius, headers, null, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Headers headers, JSON json){
                 Log.i("test", "");
@@ -112,6 +116,7 @@ public class SearchPageActivity extends AppCompatActivity implements AdapterView
                         //go into the categories to get the correct aliases
                         //TODO: see why it interferes with the program above and stops the for loop
                         //AddToCategoryAliasArray(objectBusiness.getJSONObject("categories").getString("alias"));
+
                     }
                     // price String array set up
                 }catch (JSONException e) {
@@ -124,8 +129,6 @@ public class SearchPageActivity extends AppCompatActivity implements AdapterView
             }
         });
         // setting the spinners, testing variables, not real options
-        String[] mileRadius = getResources().getStringArray(R.array.mile_radius);
-        String[] priceRange = getResources().getStringArray(R.array.price_range);
 
         // TODO: make the string array priceString & ratingString successfully link below
         // priceString crashes the app
@@ -143,7 +146,7 @@ public class SearchPageActivity extends AppCompatActivity implements AdapterView
 
     }
 
-    // storing the different strings to then compare their values
+    //storing the different strings to then compare their values
     private void AddToCategoryAliasArray(String al){
         if (!categoriesAlias.contains(al)) {
             categoriesAlias.add(al);
@@ -153,7 +156,7 @@ public class SearchPageActivity extends AppCompatActivity implements AdapterView
     private void AddToArrayOfPrice(String p){price.add(p); filteredPriceMethod(p);}
     private void AddToArrayOfRating(Double r){rating.add(r); filteredRatingMethod(r);}
 
-    // TODO: sort all the values to then throw the options back at the spinners
+    //TODO: sort all the values to then throw the options back at the spinners
     private void filteredRatingMethod(Double r) {
         if (r >= 1 && r < 2){
             if (!filteredRating.contains("1+")){
@@ -203,7 +206,9 @@ public class SearchPageActivity extends AppCompatActivity implements AdapterView
             }
         }
 }
-    // adds alias if it's not a repeat
+
+
+    //adds alias if it's not a repeat
     private void AddToArrayOfName(String a){
         if (!name.contains(a)) {
             name.add(a);
@@ -215,6 +220,7 @@ public class SearchPageActivity extends AppCompatActivity implements AdapterView
 //    private void AddToArrayOfPhone(String p){
 //        phone.add(p);
 //    }
+
     private void goRestaurantPage(){
         Intent i = new Intent(SearchPageActivity.this, RestaurantActivity.class);
         startActivity(i);

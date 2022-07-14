@@ -15,6 +15,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.restaurantroulette.R;
@@ -23,28 +24,31 @@ import com.example.restaurantroulette.SearchPageActivity;
 public class HomeFragment extends Fragment implements View.OnClickListener{
     public Button btStart;
     public EditText etZipCode;
-    public Spinner spLocation;
+    public TextView tvMileInstructions;
+    public EditText etMileRadius;
     //TODO: change to int when time comes to set limits on zip codes
     public String zipCode;
+    public String mileRadius;
     View view;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_home, container, false);
         etZipCode = view.findViewById(R.id.etZipCode);
-        // zipCode = Integer.parseInt(etZipCode.getText().toString());
         btStart = view.findViewById(R.id.btStartSearch);
+        etMileRadius = view.findViewById(R.id.etMileRadius);
+        tvMileInstructions = view.findViewById(R.id.tvMileInstructions);
         // when the user clicks the start button
         btStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //TODO: Set limits on zip codes so they don't exceed 5 digits, note: some zipcodes start with two zeros
-                if (etZipCode.getText().toString().isEmpty()){
-                    Toast.makeText(getContext(), "Enter your Zip Code", Toast.LENGTH_SHORT).show();
+                if (etZipCode.getText().toString().isEmpty() || etMileRadius.getText().toString().isEmpty()){
+                    Toast.makeText(getContext(), "Enter your Zip Code and Mile Radius", Toast.LENGTH_SHORT).show();
                 }else{
                     // this zip code is what will go into the yelp location section
                     zipCode = etZipCode.getText().toString();
-                    Log.i("hello", "onClick: " + zipCode);
+                    mileRadius = etMileRadius.getText().toString();
                     goSearchPage();
                 }
             }
@@ -58,6 +62,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
     private void goSearchPage() {
         Intent i = new Intent(getActivity(), SearchPageActivity.class);
         i.putExtra("zip", zipCode);
+        i.putExtra("radius", mileRadius);
         startActivity(i);
     }
     // empty method for implementation of view.onclicklistener

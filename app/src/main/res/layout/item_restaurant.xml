@@ -11,22 +11,20 @@
         android:layout_height="148dp"
         android:layout_marginTop="32dp"
         android:scaleType="centerCrop"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.069"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:srcCompat="@tools:sample/avatars" />
 
     <TextView
         android:id="@+id/tvRestName"
-        android:layout_width="237dp"
-        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_height="55dp"
         android:layout_marginStart="4dp"
         android:layout_marginTop="32dp"
         android:fontFamily="monospace"
         android:text="Name"
         android:textColor="#FFFFFF"
-        android:textSize="16sp"
+        android:textSize="14sp"
         app:layout_constraintStart_toEndOf="@+id/ivRestPic"
         app:layout_constraintTop_toTopOf="parent" />
 

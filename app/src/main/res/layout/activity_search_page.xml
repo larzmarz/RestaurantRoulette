@@ -11,19 +11,18 @@
         android:id="@+id/btSurpriseMe"
         android:layout_width="171dp"
         android:layout_height="50dp"
-        android:layout_marginBottom="112dp"
+        android:layout_marginBottom="120dp"
         android:text="Surprise me"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/spMileRadius"
-        app:layout_constraintHorizontal_bias="0.452"
-        app:layout_constraintStart_toStartOf="@+id/spMileRadius" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/tvRating"
         android:layout_width="254dp"
         android:layout_height="38dp"
         android:layout_marginStart="4dp"
-        android:layout_marginTop="152dp"
+        android:layout_marginTop="80dp"
         android:text="Rating Preferences:"
         android:textColor="#FFFFFF"
         android:textSize="24sp"
@@ -34,25 +33,13 @@
         android:id="@+id/tvPriceRange"
         android:layout_width="145dp"
         android:layout_height="35dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="160dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="172dp"
         android:text="Price Range:"
         android:textColor="#FFFFFF"
         android:textSize="24sp"
         app:layout_constraintStart_toStartOf="@+id/spPriceRange"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/tvMileRadius"
-        android:layout_width="145dp"
-        android:layout_height="35dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="32dp"
-        android:text="Mile Radius:"
-        android:textColor="#FFFFFF"
-        android:textSize="24sp"
-        app:layout_constraintStart_toStartOf="@+id/tvPriceRange"
-        app:layout_constraintTop_toBottomOf="@+id/spPriceRange" />
 
     <Spinner
         android:id="@+id/spPriceRange"
@@ -63,16 +50,6 @@
         app:layout_constraintHorizontal_bias="0.68"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvPriceRange" />
-
-    <Spinner
-        android:id="@+id/spMileRadius"
-        android:layout_width="361dp"
-        android:layout_height="34dp"
-        android:layout_marginTop="4dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.68"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvMileRadius" />
 
     <Spinner
         android:id="@+id/spRating"
@@ -88,10 +65,9 @@
         android:id="@+id/btRandomize"
         android:layout_width="171dp"
         android:layout_height="50dp"
-        android:layout_marginBottom="200dp"
+        android:layout_marginBottom="208dp"
         android:text="randomize"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/spMileRadius"
-        app:layout_constraintHorizontal_bias="0.452"
-        app:layout_constraintStart_toStartOf="@+id/spMileRadius" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
