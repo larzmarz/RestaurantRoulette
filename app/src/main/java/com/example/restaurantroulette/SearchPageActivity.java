@@ -32,7 +32,6 @@ import okhttp3.Headers;
 public class SearchPageActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     private Spinner spTypeFood;
     private Spinner spPriceRange;
-    private Spinner spLocation;
     private Spinner spRating;
     private Button btRandomize;
     private Button btSurpriseMe;
@@ -57,6 +56,7 @@ public class SearchPageActivity extends AppCompatActivity implements AdapterView
         String mileRadius = intent.getStringExtra("radius");
         spPriceRange = findViewById(R.id.spPriceRange);
         spRating = findViewById(R.id.spRating);
+        spTypeFood = findViewById(R.id.spFoodTypes);
         btSurpriseMe = findViewById(R.id.btSurpriseMe);
         btSurpriseMe.setOnClickListener(new View.OnClickListener() {
             // here is where the restaurant will be completely randomized
@@ -91,9 +91,14 @@ public class SearchPageActivity extends AppCompatActivity implements AdapterView
         // TODO: get zipcode input from the search page
         int zip_int = Integer.parseInt(zipcode);
         int radius_int = Integer.parseInt(mileRadius);
-        if(radius_int == 0){
+        if (radius_int == 0) {
             radius_int = 1609 * 20;
-        }else if(radius_int > 0){
+            //TODO: troubleshoot this line and uncomment it when done
+            //the max radius is 25 miles
+//        }else if (radius_int > 25){
+//            radius_int = 1609 * 25;
+//        }
+        }else if (radius_int > 0 && radius_int <= 25){
             radius_int *= 1609;
         }
         String location = "?location=" + zip_int;
@@ -115,12 +120,13 @@ public class SearchPageActivity extends AppCompatActivity implements AdapterView
                         AddToArrayOfUrl(objectBusiness.getString("url"));
                         //go into the categories to get the correct aliases
                         //TODO: see why it interferes with the program above and stops the for loop
-                        //AddToCategoryAliasArray(objectBusiness.getJSONObject("categories").getString("alias"));
-
+                        //iterate through categories
+                        AddToCategoryAliasArray(objectBusiness.getJSONArray("categories").getJSONObject(0).getString("alias"));
                     }
                     // price String array set up
                 }catch (JSONException e) {
                     e.printStackTrace();
+                    Log.i("error: ",  e.toString());
                 }
             }
             @Override
@@ -133,10 +139,14 @@ public class SearchPageActivity extends AppCompatActivity implements AdapterView
         // TODO: make the string array priceString & ratingString successfully link below
         // priceString crashes the app
         ArrayAdapter<String> adapter1 = new ArrayAdapter(this, android.R.layout.simple_spinner_item, filteredPrice);
+        ArrayAdapter<String> adapter2 = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_item, categoriesAlias);
         ArrayAdapter<String> adapter3 = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_spinner_item, filteredRating);
+
         adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         adapter3.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spPriceRange.setAdapter(adapter1);
+        spTypeFood.setAdapter(adapter2);
         spRating.setAdapter(adapter3);
 
         // these are the user's responses
@@ -146,7 +156,7 @@ public class SearchPageActivity extends AppCompatActivity implements AdapterView
 
     }
 
-    //storing the different strings to then compare their values
+    // storing the different strings to then compare their values
     private void AddToCategoryAliasArray(String al){
         if (!categoriesAlias.contains(al)) {
             categoriesAlias.add(al);
@@ -156,7 +166,7 @@ public class SearchPageActivity extends AppCompatActivity implements AdapterView
     private void AddToArrayOfPrice(String p){price.add(p); filteredPriceMethod(p);}
     private void AddToArrayOfRating(Double r){rating.add(r); filteredRatingMethod(r);}
 
-    //TODO: sort all the values to then throw the options back at the spinners
+    // TODO: sort all the values to then throw the options back at the spinners
     private void filteredRatingMethod(Double r) {
         if (r >= 1 && r < 2){
             if (!filteredRating.contains("1+")){
@@ -206,9 +216,7 @@ public class SearchPageActivity extends AppCompatActivity implements AdapterView
             }
         }
 }
-
-
-    //adds alias if it's not a repeat
+    // adds alias if it's not a repeat
     private void AddToArrayOfName(String a){
         if (!name.contains(a)) {
             name.add(a);

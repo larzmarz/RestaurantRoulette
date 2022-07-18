@@ -7,6 +7,28 @@
     android:background="@drawable/orange_splash"
     tools:context=".SearchPageActivity">
 
+    <Spinner
+        android:id="@+id/spFoodTypes"
+        android:layout_width="361dp"
+        android:layout_height="34dp"
+        android:layout_marginTop="108dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.68"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvRating" />
+
+    <TextView
+        android:id="@+id/tvFoodTypes"
+        android:layout_width="145dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="380dp"
+        android:text="Food Types:"
+        android:textColor="#FFFFFF"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="@+id/spPriceRange"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btSurpriseMe"
         android:layout_width="171dp"
@@ -22,7 +44,7 @@
         android:layout_width="254dp"
         android:layout_height="38dp"
         android:layout_marginStart="4dp"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="32dp"
         android:text="Rating Preferences:"
         android:textColor="#FFFFFF"
         android:textSize="24sp"
