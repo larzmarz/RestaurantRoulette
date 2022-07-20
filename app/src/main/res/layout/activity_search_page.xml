@@ -4,30 +4,79 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/orange_splash"
+    android:background="@color/black"
     tools:context=".SearchPageActivity">
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/til_price"
+        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
+        android:layout_width="378dp"
+        android:layout_height="47dp"
+        android:layout_marginTop="21dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.461"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/til_rating"
+        app:startIconDrawable="@drawable/ic_baseline_attach_money_24"
+        tools:ignore="MissingConstraints">
+
+        <AutoCompleteTextView
+            android:id="@+id/act_price"
+            android:layout_width="379dp"
+            android:layout_height="54dp"
+            android:background="#C6BABA"
+            android:hint="Max Price"
+            android:inputType="none"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/til_rating"
+        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
+        android:layout_width="0dp"
+        android:layout_height="52dp"
+        android:layout_marginStart="11dp"
+        android:layout_marginTop="190dp"
+        android:layout_marginEnd="13dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:startIconDrawable="@drawable/ic_baseline_attach_money_24"
+        tools:ignore="MissingConstraints">
+
+        <AutoCompleteTextView
+            android:id="@+id/act_rating"
+            android:layout_width="match_parent"
+            android:layout_height="54dp"
+            android:background="#C6BABA"
+            android:hint="Min Rating"
+            android:inputType="none"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:id="@+id/tvFoodAliases"
+        android:layout_width="399dp"
+        android:layout_height="52dp"
+        android:layout_marginStart="8dp"
+        android:background="@android:drawable/editbox_background"
+        android:drawableRight="@android:drawable/arrow_down_float"
+        android:drawablePadding="16dp"
+        android:hint="Select Food Types"
+        android:padding="12dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/til_price"
+        app:layout_constraintVertical_bias="0.078" />
 
     <Spinner
         android:id="@+id/spFoodTypes"
         android:layout_width="361dp"
         android:layout_height="34dp"
-        android:layout_marginTop="108dp"
+        android:layout_marginTop="112dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.68"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvRating" />
-
-    <TextView
-        android:id="@+id/tvFoodTypes"
-        android:layout_width="145dp"
-        android:layout_height="35dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="380dp"
-        android:text="Food Types:"
-        android:textColor="#FFFFFF"
-        android:textSize="24sp"
-        app:layout_constraintStart_toStartOf="@+id/spPriceRange"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/til_price" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btSurpriseMe"
@@ -39,50 +88,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <TextView
-        android:id="@+id/tvRating"
-        android:layout_width="254dp"
-        android:layout_height="38dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="32dp"
-        android:text="Rating Preferences:"
-        android:textColor="#FFFFFF"
-        android:textSize="24sp"
-        app:layout_constraintStart_toStartOf="@+id/tvPriceRange"
-        app:layout_constraintTop_toBottomOf="@+id/spPriceRange" />
-
-    <TextView
-        android:id="@+id/tvPriceRange"
-        android:layout_width="145dp"
-        android:layout_height="35dp"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="172dp"
-        android:text="Price Range:"
-        android:textColor="#FFFFFF"
-        android:textSize="24sp"
-        app:layout_constraintStart_toStartOf="@+id/spPriceRange"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Spinner
-        android:id="@+id/spPriceRange"
-        android:layout_width="361dp"
-        android:layout_height="34dp"
-        android:layout_marginTop="4dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.68"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvPriceRange" />
-
-    <Spinner
-        android:id="@+id/spRating"
-        android:layout_width="361dp"
-        android:layout_height="34dp"
-        android:layout_marginTop="4dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.76"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvRating" />
-
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btRandomize"
         android:layout_width="171dp"
@@ -92,4 +97,5 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

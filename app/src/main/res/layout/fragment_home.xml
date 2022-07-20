@@ -5,15 +5,14 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/orange_splash"
+    android:background="@color/black"
     tools:context=".fragment.HomeFragment">
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btStartSearch"
         android:layout_width="234dp"
         android:layout_height="65dp"
-        android:background="#73F1F0F0"
-        android:backgroundTint="#DDFFFFFF"
+        android:background="#00FFFFFF"
         android:text="Start your search"
         android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -21,21 +20,21 @@
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvMileInstructions"
-        app:layout_constraintVertical_bias="0.089" />
+        app:layout_constraintVertical_bias="0.133" />
 
     <EditText
         android:id="@+id/etZipCode"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="172dp"
-        android:backgroundTint="@color/white"
+        android:layout_marginTop="156dp"
+        android:backgroundTint="#9CBDE4"
         android:ems="10"
         android:hint="Zip Code..."
         android:inputType="textPersonName"
         android:textColor="#FFFFFF"
         android:textColorHint="#FFFFFF"
         app:layout_constraintEnd_toEndOf="@+id/btStartSearch"
-        app:layout_constraintHorizontal_bias="0.291"
+        app:layout_constraintHorizontal_bias="0.333"
         app:layout_constraintStart_toStartOf="@+id/btStartSearch"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -43,8 +42,8 @@
         android:id="@+id/etMileRadius"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="6dp"
-        android:backgroundTint="#FFFFFF"
+        android:layout_marginTop="24dp"
+        android:backgroundTint="#9CAEDC"
         android:ems="10"
         android:hint="Mile Radius..."
         android:inputType="textPersonName"
@@ -55,16 +54,48 @@
 
     <TextView
         android:id="@+id/tvMileInstructions"
-        android:layout_width="316dp"
-        android:layout_height="19dp"
+        android:layout_width="343dp"
+        android:layout_height="24dp"
+        android:layout_marginTop="12dp"
         android:fontFamily="sans-serif-black"
         android:text="If you have no preference for mile radius, put 0"
         android:textAlignment="center"
-        android:textColor="#FFFFFF"
-        android:textSize="12sp"
+        android:textColor="#959EED"
+        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etMileRadius" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="211dp"
+        android:layout_height="131dp"
+        android:layout_marginTop="16dp"
+        android:src="@drawable/neon_pink_chopsticks"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="348dp"
+        android:layout_height="150dp"
+        android:src="@drawable/pinkpurplebox"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.492"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvMileInstructions"
+        app:layout_constraintVertical_bias="0.029" />
+
+    <ImageView
+        android:id="@+id/imageView5"
+        android:layout_width="122dp"
+        android:layout_height="125dp"
+        android:layout_marginStart="144dp"
+        android:layout_marginTop="56dp"
+        android:src="@drawable/neonpinkcupcake"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btStartSearch" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

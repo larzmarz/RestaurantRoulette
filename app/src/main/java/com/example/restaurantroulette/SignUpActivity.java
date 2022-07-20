@@ -15,7 +15,6 @@ import com.parse.ParseUser;
 import com.parse.SignUpCallback;
 
 public class SignUpActivity extends AppCompatActivity {
-    ParseUser user = new ParseUser();
     public static final String TAG = "SignupActivity";
     public EditText etUsernameSU;
     public EditText etPasswordSU;
@@ -40,7 +39,7 @@ public class SignUpActivity extends AppCompatActivity {
                 if (!etUsernameSU.getText().toString().isEmpty() && !etPasswordSU.getText().toString().isEmpty() && !etFullNameSU.getText().toString().isEmpty() && !etPwdRetypeSU.getText().toString().isEmpty()){
                     //if the passwords match
                     if (etPasswordSU.getText().toString().equals(etPwdRetypeSU.getText().toString())){
-                        ParseUser user = new ParseUser();
+                        User user = new User();
                         user.setUsername(etUsernameSU.getText().toString());
                         user.setPassword(etPasswordSU.getText().toString());
                         //TODO: save the full names to the backend
