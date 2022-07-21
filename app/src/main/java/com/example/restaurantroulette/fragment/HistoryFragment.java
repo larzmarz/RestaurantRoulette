@@ -17,9 +17,11 @@ import android.view.ViewGroup;
 import com.example.restaurantroulette.Adapters.YelpAdapter;
 import com.example.restaurantroulette.R;
 import com.example.restaurantroulette.Restaurant;
+import com.example.restaurantroulette.User;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
+import com.parse.ParseUser;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,9 +32,9 @@ public class HistoryFragment extends Fragment {
     protected YelpAdapter adapter;
     protected List<Restaurant> allRestaurants;
     public static final String TAG = "History Fragment";
+    public User user = (User) ParseUser.getCurrentUser();
     // required empty constructor
     public HistoryFragment(){}
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
@@ -58,22 +60,22 @@ public class HistoryFragment extends Fragment {
     }
     private void queryRestaurants() {
         ParseQuery<Restaurant> query = ParseQuery.getQuery(Restaurant.class);
-        query.include(Restaurant.KEY_USER);
-        query.addDescendingOrder(Restaurant.KEY_CREATED_KEY);
-        query.findInBackground(new FindCallback<Restaurant>() {
-            @Override
-            public void done(List<Restaurant> rests, ParseException e) {
-                if (e != null){
-                    Log.i(TAG, "Issues with getting restaurants", e);
-                    return;
+            query.include(Restaurant.KEY_USER);
+            query.addDescendingOrder(Restaurant.KEY_CREATED_KEY);
+            query.findInBackground(new FindCallback<Restaurant>() {
+                @Override
+                public void done(List<Restaurant> rests, ParseException e) {
+                    if (e != null){
+                        Log.i(TAG, "Issues with getting restaurants", e);
+                        return;
+                    }
+                    for (Restaurant rest : rests){
+                        Log.i(TAG, "Restaurant: " + rest.getName() + ",username: " + rest.getUser().getUsername());
+                    }
+                    allRestaurants.addAll(rests);
+                    adapter.notifyDataSetChanged();
+                    swipeContainer.setRefreshing(false);
                 }
-                for (Restaurant rest : rests){
-                    Log.i(TAG, "Restaurant: " + rest.getName() + ",username: " + rest.getUser().getUsername());
-                }
-                allRestaurants.addAll(rests);
-                adapter.notifyDataSetChanged();
-                swipeContainer.setRefreshing(false);
-            }
-        });
+            });
+        }
     }
-}

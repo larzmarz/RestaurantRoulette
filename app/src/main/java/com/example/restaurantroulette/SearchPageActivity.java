@@ -187,11 +187,14 @@ public class SearchPageActivity extends AppCompatActivity implements AdapterView
         ArrayAdapter<String> arrayAdapter_price = new ArrayAdapter<>(getApplicationContext(), androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,filteredPrice);
         ArrayAdapter<String> arrayAdapter_rating = new ArrayAdapter<>(getApplicationContext(), androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,filteredRating);
         ArrayAdapter<String> adapter2 = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_item, categoriesAlias);
+        ArrayAdapter<String> arrayadapter_alias = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_item, categoriesAlias);
 
         adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         act_price.setAdapter(arrayAdapter_price);
         act_rating.setAdapter(arrayAdapter_rating);
+
+
         spTypeFood.setAdapter(adapter2);
         act_price.setThreshold(1);
         act_price.setThreshold(1);
@@ -227,7 +230,6 @@ public class SearchPageActivity extends AppCompatActivity implements AdapterView
                 Log.i("SearchPage", ratingSelected);
             }
         });
-        ArrayAdapter adapter = new ArrayAdapter<String>(SearchPageActivity.this, com.facebook.stetho.R.layout.abc_action_bar_view_list_nav_layout, aliasesArray);
         tvAliases.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -235,7 +237,7 @@ public class SearchPageActivity extends AppCompatActivity implements AdapterView
                 AlertDialog.Builder builder = new AlertDialog.Builder(SearchPageActivity.this);
                 builder.setTitle("Select FoodTypes");
                 builder.setCancelable(false);
-                builder.setMultiChoiceItems(aliasesArray, selectedAlias, new DialogInterface.OnMultiChoiceClickListener() {
+                builder.setMultiChoiceItems(categoriesAlias.toArray(aliasesArray), selectedAlias, new DialogInterface.OnMultiChoiceClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which, boolean isChecked) {
                         Log.i(TAG, "setting multiple choices");
@@ -252,14 +254,14 @@ public class SearchPageActivity extends AppCompatActivity implements AdapterView
                     public void onClick(DialogInterface dialog, int which) {
                         Log.i(TAG, "ok button");
                         StringBuilder stringBuilder = new StringBuilder("");
-                        for(int j = 0; j < aliasList.size(); j++){
-                            stringBuilder.append(aliasesArray[aliasList.get(j)]);
-                            if (j != aliasList.size() - 1){
-                                stringBuilder.append(", ");
+                            for (int j = 0; j < aliasList.size(); j++) {
+                                stringBuilder.append(aliasesArray[aliasList.get(j)]);
+                                if (j != aliasList.size()) {
+                                    stringBuilder.append(" ");
+                                }
                             }
-                        }
                         tvAliases.setText(stringBuilder.toString());
-
+                        Log.i(TAG, stringBuilder.toString());
                     }
                 });
                 builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
