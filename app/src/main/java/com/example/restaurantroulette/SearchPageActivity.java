@@ -63,6 +63,7 @@ public class SearchPageActivity extends AppCompatActivity implements AdapterView
     String priceSelected;
     String ratingSelected;
     Double ratingSelectedFiltered;
+    StringBuilder stringBuilder = new StringBuilder("");
     int officialHolder = 0;
     int finalIndexOfRestaurant = 0;
     boolean[] selectedAlias;
@@ -140,17 +141,16 @@ public class SearchPageActivity extends AppCompatActivity implements AdapterView
                         //adding all the values of the restaurants given to the app through json into their respective arrays
                         JSONObject objectBusiness = businesses.getJSONObject(i);
                         try {
-                            if(objectBusiness.getString("price") != null){
-                                AddToArrayOfPrice(objectBusiness.getString("price"));
-                            }
-                            AddToArrayOfName(objectBusiness.getString("name"));
-                            AddToArrayOfRating(objectBusiness.getDouble("rating"));
-                            AddToArrayOfImageUrl(objectBusiness.getString("image_url"));
-                            AddToArrayOfUrl(objectBusiness.getString("url"));
+                            AddToArrayOfPrice(objectBusiness.getString("price"));
                         }
                         catch (Exception e){
-                            Log.i(TAG,"stopped working on" +i);
+                            Log.i(TAG,"no price" +i);
+                            AddToArrayOfPrice("unknown");
                         }
+                        AddToArrayOfName(objectBusiness.getString("name"));
+                        AddToArrayOfRating(objectBusiness.getDouble("rating"));
+                        AddToArrayOfImageUrl(objectBusiness.getString("image_url"));
+                        AddToArrayOfUrl(objectBusiness.getString("url"));
                         //go into the categories to get the correct aliases
                         //TODO: see why it interferes with the program above and stops the for loop
                         //iterate through categories
@@ -253,11 +253,10 @@ public class SearchPageActivity extends AppCompatActivity implements AdapterView
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         Log.i(TAG, "ok button");
-                        StringBuilder stringBuilder = new StringBuilder("");
                             for (int j = 0; j < aliasList.size(); j++) {
                                 stringBuilder.append(aliasesArray[aliasList.get(j)]);
                                 if (j != aliasList.size()) {
-                                    stringBuilder.append(" ");
+                                    stringBuilder.append(",");
                                 }
                             }
                         tvAliases.setText(stringBuilder.toString());
@@ -329,7 +328,10 @@ public class SearchPageActivity extends AppCompatActivity implements AdapterView
     private void AddToArrayOfImageUrl(String url){imageUrl.add(url);}
     private void AddToArrayOfPrice(String p){
         price.add(p);
-        filteredPriceMethod(p);}
+        if(!p.equals("unknown")){
+            filteredPriceMethod(p);
+        }
+    }
     private void AddToArrayOfRating(Double r){rating.add(r); filteredRatingMethod(r);}
     // TODO: sort all the values to then throw the options back at the spinners
     private void filteredRatingMethod(Double r) {
