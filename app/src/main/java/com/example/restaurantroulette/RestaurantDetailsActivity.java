@@ -11,7 +11,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
@@ -36,7 +35,8 @@ public class RestaurantDetailsActivity extends AppCompatActivity {
         etThoughts = findViewById(R.id.etThoughts);
         btSubmit = findViewById(R.id.btSubmit);
         tvYourthoughts = findViewById(R.id.tvYourThoughts);
-        tvYourPreviousThoughts = findViewById(R.id.tvtvYourPostedThoughts);
+        tvYourPreviousThoughts = findViewById(R.id.tvYourPostedThoughts);
+        restaurant = getIntent().getParcelableExtra(RESTAURANT_KEY);
         btSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -46,7 +46,6 @@ public class RestaurantDetailsActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        restaurant = getIntent().getParcelableExtra(RESTAURANT_KEY);
         if(restaurant.getKeyThoughts() != null){
             tvYourPreviousThoughts.setText(restaurant.getKeyThoughts());
         }else{

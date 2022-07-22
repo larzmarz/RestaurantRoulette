@@ -65,7 +65,7 @@ public class SearchPageActivity extends AppCompatActivity implements AdapterView
     Double ratingSelectedFiltered;
     StringBuilder stringBuilder = new StringBuilder("");
     int officialHolder = 0;
-    int finalIndexOfRestaurant = 0;
+    int finalIndexOfRestaurant;
     boolean[] selectedAlias;
     public static final String TAG = "Search Page Activity";
 
@@ -303,13 +303,14 @@ public class SearchPageActivity extends AppCompatActivity implements AdapterView
                 for (int r = 0; r < rating.size(); r++) {
                     //if the rating in the list is higher or equal to what the user asked for
                     if (rating.get(r) >= ratingSelectedFiltered){
-                        //if
                         rHolder = r;
                         if (rHolder == pHolder) {
                             officialHolder = rHolder;
                             restaurantIndices.add(officialHolder);
                             cnt++;
                         }
+                    }else{
+                        return;
                     }
                 }
             }
@@ -317,6 +318,7 @@ public class SearchPageActivity extends AppCompatActivity implements AdapterView
         if (cnt > 0){
             Random rand = new Random();
             finalIndexOfRestaurant = rand.nextInt(restaurantIndices.size());
+            Log.i(TAG, String.valueOf(finalIndexOfRestaurant));
             goRestaurantPage();
         }else {
             Toast.makeText(this, "No matches available, try again!", Toast.LENGTH_SHORT).show();
