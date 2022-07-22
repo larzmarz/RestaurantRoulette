@@ -5,7 +5,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/orange_splash"
+    android:background="@color/black"
     tools:context=".fragment.HistoryFragment">
 
     <androidx.appcompat.widget.Toolbar
@@ -15,15 +15,14 @@
         android:minHeight="?attr/actionBarSize">
 
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            android:id="@+id/swipeContainer"
+            android:id="@+id/swipeContainerFeed"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvPlaces"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="8dp" />
+                android:layout_height="match_parent" />
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
     </androidx.appcompat.widget.Toolbar>
 </FrameLayout>

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/tempbackgroundsearch"
+    android:background="@color/black"
     tools:context=".RestaurantDetailsActivity">
 
     <ImageView
@@ -26,6 +26,7 @@
         android:layout_marginEnd="16dp"
         android:fontFamily="sans-serif-medium"
         android:text="TextView"
+        android:textColor="#FBF8F8"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/ivPhoto"
@@ -38,19 +39,50 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="4dp"
         android:text="TextView"
+        android:textColor="#FFFDFD"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ivPhoto" />
 
     <EditText
         android:id="@+id/etThoughts"
-        android:layout_width="351dp"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="4dp"
         android:ems="10"
         android:hint="Thoughts on this Restaurant..."
         android:inputType="textPersonName"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#FFFFFF"
         android:textSize="14sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvUrlDV" />
+
+    <Button
+        android:id="@+id/btSubmit"
+        android:layout_width="93dp"
+        android:layout_height="41dp"
+        android:layout_marginEnd="4dp"
+        android:background="#418C3B9A"
+        android:text="Submit"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/etThoughts"
+        tools:layout_editor_absoluteY="197dp" />
+
+    <TextView
+        android:id="@+id/tvYourThoughts"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="Your thoughts:"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etThoughts" />
+
+    <TextView
+        android:id="@+id/tvtvYourPostedThoughts"
+        android:layout_width="394dp"
+        android:layout_height="25dp"
+        android:text="TextView"
+        app:layout_constraintStart_toStartOf="@+id/tvYourThoughts"
+        app:layout_constraintTop_toBottomOf="@+id/tvYourThoughts" />
 </androidx.constraintlayout.widget.ConstraintLayout>

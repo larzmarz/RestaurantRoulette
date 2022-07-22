@@ -19,6 +19,9 @@ import com.bumptech.glide.request.RequestOptions;
 import com.example.restaurantroulette.R;
 import com.example.restaurantroulette.Restaurant;
 import com.example.restaurantroulette.RestaurantDetailsActivity;
+import com.example.restaurantroulette.User;
+
+import org.w3c.dom.Text;
 
 import java.util.List;
 
@@ -60,18 +63,21 @@ public class YelpAdapter extends RecyclerView.Adapter<YelpAdapter.ViewHolder> {
         TextView tvYelpUrl;
         TextView tvDate;
         ImageView ivRestPicsURL;
+        TextView tvUsernameFeed;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             tvName = itemView.findViewById(R.id.tvRestName);
             tvYelpUrl = itemView.findViewById(R.id.tvYelpUrl);
             tvDate = itemView.findViewById(R.id.tvDate);
             ivRestPicsURL = itemView.findViewById(R.id.ivRestPic);
+            tvUsernameFeed = itemView.findViewById(R.id.tvUsernameFeed);
             itemView.setOnClickListener(this);
         }
         public void bind(Restaurant restaurant) {
             tvName.setText(restaurant.getName());
             tvYelpUrl.setText(restaurant.getDescription());
             tvDate.setText(restaurant.getCreated());
+            tvUsernameFeed.setText(restaurant.getUser().getUsername());
             Glide.with(context)
                 .load(restaurant.getImage())
                 .placeholder(R.drawable.orange_splash)

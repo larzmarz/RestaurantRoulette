@@ -17,7 +17,7 @@ public class Restaurant extends ParseObject{
     public static final String KEY_NAME = "name";
     public static final String KEY_USER = "user";
     public static final String KEY_CREATED_KEY = "createdAt";
-
+    public static final String KEY_THOUGHTS = "Thoughts";
 
     public ParseUser getUser(){
         return getParseUser(KEY_USER);
@@ -27,9 +27,7 @@ public class Restaurant extends ParseObject{
     }
     public String getName(){return getString(KEY_NAME);}
     public void setName(String name){put(KEY_NAME, name);}
-    public String getDescription(){
-        return getString(KEY_DESCRIPTION);
-    }
+    public String getDescription(){return getString(KEY_DESCRIPTION);}
     public void setDescription(String description){
         put(KEY_DESCRIPTION, description);
     }
@@ -45,7 +43,6 @@ public class Restaurant extends ParseObject{
     public void setCreated(ParseFile date){
         put(KEY_CREATED_KEY, date);
     }
-
-
-
+    public String getKeyThoughts(){return getString(KEY_THOUGHTS);}
+    public void setThoughts(String thoughts){put(KEY_THOUGHTS, thoughts);}
 }

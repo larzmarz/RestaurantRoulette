@@ -293,11 +293,17 @@ public class SearchPageActivity extends AppCompatActivity implements AdapterView
         int rHolder;
         int pHolder;
         int cnt = 0;
+        //goes through price arraylist
         for (int p = 0; p < price.size(); p++){
+            //checking if the length of the price at p is the same as the user indicated or less
             if (price.get(p).equals(priceSelected) || (price.get(p).length() <= priceSelected.length())) {
+                //if it is, assign that index a value of p
                 pHolder = p;
+                //go into the rating arraylist
                 for (int r = 0; r < rating.size(); r++) {
-                    if (rating.get(r) <= ratingSelectedFiltered){
+                    //if the rating in the list is higher or equal to what the user asked for
+                    if (rating.get(r) >= ratingSelectedFiltered){
+                        //if
                         rHolder = r;
                         if (rHolder == pHolder) {
                             officialHolder = rHolder;

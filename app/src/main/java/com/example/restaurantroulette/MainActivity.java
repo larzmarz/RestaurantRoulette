@@ -13,6 +13,8 @@ import com.example.restaurantroulette.fragment.HistoryFragment;
 import com.example.restaurantroulette.fragment.HomeFragment;
 import com.example.restaurantroulette.fragment.UserFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.parse.Parse;
+import com.parse.ParseUser;
 
 public class MainActivity extends AppCompatActivity {
     // variables used in this activity
@@ -20,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
     private BottomNavigationView bottomNavigationView;
     HistoryFragment historyfragment = new HistoryFragment();
     HomeFragment homeFragment = new HomeFragment();
-    UserFragment userFragment = new UserFragment();
+    UserFragment userFragment = new UserFragment(ParseUser.getCurrentUser());
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -38,6 +38,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
         btStart = view.findViewById(R.id.btStartSearch);
         etMileRadius = view.findViewById(R.id.etMileRadius);
         tvMileInstructions = view.findViewById(R.id.tvMileInstructions);
+
         // when the user clicks the start button
         btStart.setOnClickListener(new View.OnClickListener() {
             @Override

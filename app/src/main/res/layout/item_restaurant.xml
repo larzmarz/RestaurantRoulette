@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#7A30305E"
     android:outlineSpotShadowColor="#1667A8">
 
     <ImageView
@@ -19,7 +18,7 @@
 
     <TextView
         android:id="@+id/tvRestName"
-        android:layout_width="38dp"
+        android:layout_width="wrap_content"
         android:layout_height="50dp"
         android:layout_marginStart="4dp"
         android:layout_marginTop="60dp"
@@ -59,8 +58,10 @@
         android:id="@+id/tvUsernameFeed"
         android:layout_width="83dp"
         android:layout_height="22dp"
+        android:layout_marginTop="10dp"
         android:text="TextView"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="10dp" />
+        android:textColor="#FBFDFF"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

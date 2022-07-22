@@ -43,7 +43,7 @@ public class HistoryFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstances) {
         super.onViewCreated(view, savedInstances);
         rvPlaces = view.findViewById(R.id.rvPlaces);
-        swipeContainer = view.findViewById(R.id.swipeContainer);
+        swipeContainer = view.findViewById(R.id.swipeContainerFeed);
         allRestaurants = new ArrayList<>();
         adapter = new YelpAdapter(getContext(), allRestaurants);
         rvPlaces.setAdapter(adapter);
