@@ -26,7 +26,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
     public EditText etZipCode;
     public TextView tvMileInstructions;
     public EditText etMileRadius;
-    //TODO: change to int when time comes to set limits on zip codes
     public String zipCode;
     public String mileRadius;
     View view;

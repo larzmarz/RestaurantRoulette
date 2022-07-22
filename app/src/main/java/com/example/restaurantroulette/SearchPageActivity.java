@@ -14,6 +14,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -31,23 +32,27 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.Reader;
+import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Random;
+import java.util.Scanner;
 
 import okhttp3.Headers;
 
 public class SearchPageActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
-    private Spinner spTypeFood;
     private Button btRandomize;
     private Button btSurpriseMe;
     private TextView tvAliases;
+    ProgressBar progressBar;
     TextInputLayout til_price;
     TextInputLayout til_rating;
     AutoCompleteTextView act_price;
     AutoCompleteTextView act_rating;
-    ArrayAdapter<String> arrayAdapter_price;
     ArrayList<String> name;
     ArrayList<Double> rating;
     ArrayList<String> price;
@@ -60,6 +65,7 @@ public class SearchPageActivity extends AppCompatActivity implements AdapterView
     ArrayList<Integer> restaurantIndices;
     ArrayList<Integer> aliasList;
     String[] aliasesArray;
+    String[] arrayOfSelectedAliases;
     String priceSelected;
     String ratingSelected;
     Double ratingSelectedFiltered;
@@ -78,9 +84,7 @@ public class SearchPageActivity extends AppCompatActivity implements AdapterView
         String zipcode = intent.getStringExtra("zip");
         String mileRadius = intent.getStringExtra("radius");
         tvAliases = findViewById(R.id.tvFoodAliases);
-
-        //TODO: rethink placement of boolean creation because at this point, aliasesArray is empty
-        spTypeFood = findViewById(R.id.spFoodTypes);
+        progressBar = findViewById(R.id.pbLoading);
         til_price = (TextInputLayout)findViewById(R.id.til_price);
         act_price = (AutoCompleteTextView) findViewById(R.id.act_price);
         til_rating = (TextInputLayout)findViewById(R.id.til_rating);
@@ -113,7 +117,6 @@ public class SearchPageActivity extends AppCompatActivity implements AdapterView
         int radius_int = Integer.parseInt(mileRadius);
         if (radius_int == 0) {
             radius_int = 1609 * 20;
-            //TODO: troubleshoot this line and uncomment it when done
             //the max radius is 25 miles
 //        }else if (radius_int > 25){
 //            radius_int = 1609 * 25;
@@ -123,11 +126,9 @@ public class SearchPageActivity extends AppCompatActivity implements AdapterView
         }
         String location = "?location=" + zip_int;
         String radius = "&radius=" + radius_int;
-        Log.i(TAG, "Attempting to set Aliases");
         client.get(BUSINESS_INFO + location + radius, headers, null, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Headers headers, JSON json){
-                Log.i(TAG, "Successful get");
                 try {
                     // for testing reasons, gets first restaurant
                     JSONArray businesses = json.jsonObject.getJSONArray("businesses");
@@ -138,43 +139,32 @@ public class SearchPageActivity extends AppCompatActivity implements AdapterView
                             AddToArrayOfPrice(objectBusiness.getString("price"));
                         }
                         catch (Exception e){
-                            Log.i(TAG,"no price" +i);
                             AddToArrayOfPrice("unknown");
                         }
                         AddToArrayOfName(objectBusiness.getString("name"));
                         AddToArrayOfRating(objectBusiness.getDouble("rating"));
                         AddToArrayOfImageUrl(objectBusiness.getString("image_url"));
                         AddToArrayOfUrl(objectBusiness.getString("url"));
-                        //go into the categories to get the correct aliases
-                        //TODO: see why it interferes with the program above and stops the for loop
-                        //iterate through categories
                         AddToCategoryAliasArray(objectBusiness.getJSONArray("categories").getJSONObject(0).getString("alias"));
-                        Log.i(TAG,"Checking if businesses exist");
                         if (i == businesses.length() - 1){
                             aliasesArray = new String[categoriesAlias.size()];
-                            Log.i(TAG, "Businesses exist");
                             for(int j = 0; j < categoriesAlias.size() - 1 ; j++){
-                                Log.i(TAG, "Attempting to set alias at "+i);
                                 if (aliasesArray[j] == null){
                                     aliasesArray[j] = categoriesAlias.get(j);
                                     selectedAlias = new boolean[aliasesArray.length];
-                                    Log.i(TAG, "Setting alias at "+i+" success");
                                 }
                             }
-                            Log.i("checkin boo", aliasesArray.toString());
                         }
                     }
                     // price String array set up
                 }catch (JSONException e) {
                     e.printStackTrace();
-                    Log.i("error: ",  e.toString());
                 }
-                Toast.makeText(SearchPageActivity.this, "done", Toast.LENGTH_SHORT).show();
-                Log.i("searchpage", "done");
+                progressBar.setVisibility(View.GONE);
             }
             @Override
             public void onFailure(int statusCode, Headers headers, String response, Throwable throwable) {
-                Log.i("fail", "");
+                Log.i("SearchPage", "error while parsing json data");
             }
         });
         // setting the spinners, testing variables, not real options
@@ -182,14 +172,10 @@ public class SearchPageActivity extends AppCompatActivity implements AdapterView
         ArrayAdapter<String> arrayAdapter_rating = new ArrayAdapter<>(getApplicationContext(), androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,filteredRating);
         ArrayAdapter<String> adapter2 = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_item, categoriesAlias);
         ArrayAdapter<String> arrayadapter_alias = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_item, categoriesAlias);
-
         adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
         act_price.setAdapter(arrayAdapter_price);
         act_rating.setAdapter(arrayAdapter_rating);
 
-
-        spTypeFood.setAdapter(adapter2);
         act_price.setThreshold(1);
         act_price.setThreshold(1);
 
@@ -197,7 +183,6 @@ public class SearchPageActivity extends AppCompatActivity implements AdapterView
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 priceSelected = parent.getItemAtPosition(position).toString();
-                Log.i("SearchPage", priceSelected);
             }
         });
         act_rating.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -221,20 +206,17 @@ public class SearchPageActivity extends AppCompatActivity implements AdapterView
                         ratingSelectedFiltered = 5.0;
                         break;
                 }
-                Log.i("SearchPage", ratingSelectedFiltered.toString());
             }
         });
         tvAliases.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.i("check array", aliasesArray[0]);
                 AlertDialog.Builder builder = new AlertDialog.Builder(SearchPageActivity.this);
                 builder.setTitle("Select FoodTypes");
                 builder.setCancelable(false);
                 builder.setMultiChoiceItems(categoriesAlias.toArray(aliasesArray), selectedAlias, new DialogInterface.OnMultiChoiceClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which, boolean isChecked) {
-                        Log.i(TAG, "setting multiple choices");
                         if(isChecked){
                             aliasList.add(which);
                             Collections.sort(aliasList);
@@ -246,7 +228,6 @@ public class SearchPageActivity extends AppCompatActivity implements AdapterView
                 builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Log.i(TAG, "ok button");
                             for (int j = 0; j < aliasList.size(); j++) {
                                 stringBuilder.append(aliasesArray[aliasList.get(j)]);
                                 if (j != aliasList.size()) {
@@ -254,7 +235,6 @@ public class SearchPageActivity extends AppCompatActivity implements AdapterView
                                 }
                             }
                         tvAliases.setText(stringBuilder.toString());
-                        Log.i(TAG, stringBuilder.toString());
                     }
                 });
                 builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -278,18 +258,16 @@ public class SearchPageActivity extends AppCompatActivity implements AdapterView
                         }
                     }
                 });
-                Log.i(TAG, "got to the bottom of builder");
                 builder.show();
             }
         });
         btRandomize.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                sortingThruSelected();
-            }
+            public void onClick(View v) {sortingThruSelected();}
         });
     }
     private void sortingThruSelected(){
+        aliasSelectedLineScanner();
         int rHolder;
         int pHolder;
         int cnt = 0;
@@ -312,11 +290,11 @@ public class SearchPageActivity extends AppCompatActivity implements AdapterView
                 }
             }
         }
+
+
         if (cnt > 0){
             Random rand = new Random();
-            //look up how to start at 0 instead of 1
             finalIndexOfRestaurant = rand.nextInt(restaurantIndices.size());
-            Log.i(TAG, String.valueOf(finalIndexOfRestaurant));
             goRestaurantPage();
         }else {
             Toast.makeText(this, "No matches available, try again!", Toast.LENGTH_SHORT).show();
@@ -341,7 +319,6 @@ public class SearchPageActivity extends AppCompatActivity implements AdapterView
         }
     }
     private void AddToArrayOfRating(Double r){rating.add(r); filteredRatingMethod(r);}
-    // TODO: sort all the values to then throw the options back at the spinners
     private void filteredRatingMethod(Double r) {
         if (r >= 1 && r < 2){
             if (!filteredRating.contains("1+")){
@@ -422,9 +399,16 @@ public class SearchPageActivity extends AppCompatActivity implements AdapterView
         intent.putExtra("price", price.get(holder));
         //intent.putExtra("phone", phone.get(holder));
         intent.putExtra("url", url.get(holder));
-        Log.i("wawawa", imageUrl.get(holder));
         startActivity(intent);
         finish();
+    }
+    private void aliasSelectedLineScanner(){
+        Reader reader = new StringReader(stringBuilder.toString());
+        Scanner scanner = new Scanner(reader).useDelimiter(",");
+        List<String> tmpList = new LinkedList<>();
+        scanner.forEachRemaining(tmpList::add);
+        arrayOfSelectedAliases = tmpList.toArray(new String[tmpList.size()]);
+
     }
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {}
