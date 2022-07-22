@@ -5,7 +5,7 @@
     <item
         android:id="@+id/action_history"
         android:icon="@drawable/ic_baseline_watch_later_24"
-        android:title="History"
+        android:title="Feed"
         app:showAsAction="always" />
     <item
         android:id="@+id/action_home"

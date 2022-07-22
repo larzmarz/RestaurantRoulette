@@ -20,7 +20,7 @@
         <entry key="app/src/main/res/layout/fragment_history.xml" value="0.5500249226888021" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.3686218261718751" />
         <entry key="app/src/main/res/layout/fragment_user.xml" value="0.23269958496093757" />
-        <entry key="app/src/main/res/layout/item_restaurant.xml" value="0.4976654052734375" />
+        <entry key="app/src/main/res/layout/item_restaurant.xml" value="0.25" />
         <entry key="app/src/main/res/layout/item_user_restaurant.xml" value="0.19444444444444445" />
         <entry key="app/src/main/res/menu/menu_bottom_navigation.xml" value="0.4036458333333333" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.3795" />

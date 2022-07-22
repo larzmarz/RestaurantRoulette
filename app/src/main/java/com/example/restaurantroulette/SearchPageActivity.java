@@ -94,12 +94,6 @@ public class SearchPageActivity extends AppCompatActivity implements AdapterView
             }
         });
         btRandomize = findViewById(R.id.btRandomize);
-        btRandomize.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                sortingThruSelected();
-            }
-        });
         name = new ArrayList<String>();
         price = new ArrayList<String>();
         rating = new ArrayList<Double>();
@@ -227,7 +221,7 @@ public class SearchPageActivity extends AppCompatActivity implements AdapterView
                         ratingSelectedFiltered = 5.0;
                         break;
                 }
-                Log.i("SearchPage", ratingSelected);
+                Log.i("SearchPage", ratingSelectedFiltered.toString());
             }
         });
         tvAliases.setOnClickListener(new View.OnClickListener() {
@@ -288,6 +282,12 @@ public class SearchPageActivity extends AppCompatActivity implements AdapterView
                 builder.show();
             }
         });
+        btRandomize.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sortingThruSelected();
+            }
+        });
     }
     private void sortingThruSelected(){
         int rHolder;
@@ -296,27 +296,25 @@ public class SearchPageActivity extends AppCompatActivity implements AdapterView
         //goes through price arraylist
         for (int p = 0; p < price.size(); p++){
             //checking if the length of the price at p is the same as the user indicated or less
-            if (price.get(p).equals(priceSelected) || (price.get(p).length() <= priceSelected.length())) {
+            if (price.get(p).equals(priceSelected) || ((price.get(p)).length() <= priceSelected.length())) {
                 //if it is, assign that index a value of p
                 pHolder = p;
                 //go into the rating arraylist
                 for (int r = 0; r < rating.size(); r++) {
                     //if the rating in the list is higher or equal to what the user asked for
                     if (rating.get(r) >= ratingSelectedFiltered){
-                        rHolder = r;
-                        if (rHolder == pHolder) {
-                            officialHolder = rHolder;
+                        if (r == pHolder) {
+                            officialHolder = r;
                             restaurantIndices.add(officialHolder);
                             cnt++;
                         }
-                    }else{
-                        return;
                     }
                 }
             }
         }
         if (cnt > 0){
             Random rand = new Random();
+            //look up how to start at 0 instead of 1
             finalIndexOfRestaurant = rand.nextInt(restaurantIndices.size());
             Log.i(TAG, String.valueOf(finalIndexOfRestaurant));
             goRestaurantPage();
@@ -327,6 +325,8 @@ public class SearchPageActivity extends AppCompatActivity implements AdapterView
             finish();
         }
     }
+
+
     // storing the different strings to then compare their values
     private void AddToCategoryAliasArray(String al){
         if (!categoriesAlias.contains(al)) {
@@ -405,10 +405,10 @@ public class SearchPageActivity extends AppCompatActivity implements AdapterView
 //    }
     private void goRestaurantPage(){
         Intent intent = new Intent(SearchPageActivity.this, RestaurantActivity.class);
-        intent.putExtra("image_url", imageUrl.get(officialHolder));
-        intent.putExtra("restaurant_name", name.get(officialHolder));
-        intent.putExtra("price", price.get(officialHolder));
-        intent.putExtra("url", url.get(officialHolder));
+        intent.putExtra("image_url", imageUrl.get(finalIndexOfRestaurant));
+        intent.putExtra("restaurant_name", name.get(finalIndexOfRestaurant));
+        intent.putExtra("price", price.get(finalIndexOfRestaurant));
+        intent.putExtra("url", url.get(finalIndexOfRestaurant));
         startActivity(intent);
         finish();
     }

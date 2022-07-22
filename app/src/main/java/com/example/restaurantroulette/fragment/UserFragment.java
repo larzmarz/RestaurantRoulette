@@ -59,7 +59,6 @@ public class UserFragment extends BaseFragment implements View.OnClickListener{
     public UserFragment(ParseUser userToFilterBy) {
         this.userToFilterBy = (User) userToFilterBy;
     }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
         // Defines the xml file for the fragment
@@ -120,6 +119,10 @@ public class UserFragment extends BaseFragment implements View.OnClickListener{
 //        btLogout.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {
+//                ParseUser currentUser =ParseUser.getCurrentUser();
+//                currentUser.logOut();
+//                Intent i = new Intent(getContext(), LoginActivity.class);
+//                startActivity(i);
 //            }
 //        });
     }
@@ -146,7 +149,6 @@ public class UserFragment extends BaseFragment implements View.OnClickListener{
             }
         });
     }
-
     public void displayUserInfo(){
         tvUsername.setText(user.getUsername());
         // TODO: make sure this is the right setter
@@ -181,7 +183,6 @@ public class UserFragment extends BaseFragment implements View.OnClickListener{
             }
         }
     }
-
     @Override
     public void onClick(View v) {}
 }

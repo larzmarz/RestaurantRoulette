@@ -58,10 +58,20 @@
         android:id="@+id/tvUsernameFeed"
         android:layout_width="83dp"
         android:layout_height="22dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="8dp"
         android:text="TextView"
         android:textColor="#FBFDFF"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/ivPfpFeed"
+        android:layout_width="39dp"
+        android:layout_height="30dp"
+        android:layout_marginEnd="1dp"
+        app:layout_constraintEnd_toStartOf="@+id/tvUsernameFeed"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:srcCompat="@tools:sample/avatars" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

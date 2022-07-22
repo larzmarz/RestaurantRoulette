@@ -64,6 +64,7 @@ public class YelpAdapter extends RecyclerView.Adapter<YelpAdapter.ViewHolder> {
         TextView tvDate;
         ImageView ivRestPicsURL;
         TextView tvUsernameFeed;
+        ImageView ivPfpFeed;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             tvName = itemView.findViewById(R.id.tvRestName);
@@ -71,6 +72,7 @@ public class YelpAdapter extends RecyclerView.Adapter<YelpAdapter.ViewHolder> {
             tvDate = itemView.findViewById(R.id.tvDate);
             ivRestPicsURL = itemView.findViewById(R.id.ivRestPic);
             tvUsernameFeed = itemView.findViewById(R.id.tvUsernameFeed);
+            ivPfpFeed = itemView.findViewById(R.id.ivPfpFeed);
             itemView.setOnClickListener(this);
         }
         public void bind(Restaurant restaurant) {
@@ -78,6 +80,12 @@ public class YelpAdapter extends RecyclerView.Adapter<YelpAdapter.ViewHolder> {
             tvYelpUrl.setText(restaurant.getDescription());
             tvDate.setText(restaurant.getCreated());
             tvUsernameFeed.setText(restaurant.getUser().getUsername());
+            User user = (User) restaurant.getUser();
+            Glide.with(context)
+                .load(user.getProfilePhoto().getUrl())
+                .circleCrop()
+                .placeholder(R.drawable.orange_splash)
+                .into(ivPfpFeed);
             Glide.with(context)
                 .load(restaurant.getImage())
                 .placeholder(R.drawable.orange_splash)
@@ -87,9 +95,9 @@ public class YelpAdapter extends RecyclerView.Adapter<YelpAdapter.ViewHolder> {
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(context, "In progress", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(context, RestaurantDetailsActivity.class);
                     intent.putExtra(RestaurantDetailsActivity.RESTAURANT_KEY, restaurant);
+                    Log.i("Yelp Adapter", user.getProfilePhoto().getUrl());
                     context.startActivity(intent);
                 }
             });

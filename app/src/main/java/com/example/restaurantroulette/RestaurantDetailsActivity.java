@@ -49,7 +49,7 @@ public class RestaurantDetailsActivity extends AppCompatActivity {
         if(restaurant.getKeyThoughts() != null){
             tvYourPreviousThoughts.setText(restaurant.getKeyThoughts());
         }else{
-            tvYourPreviousThoughts.setText("You have no postings! Enter your thoughts above an submit");
+            tvYourPreviousThoughts.setText("You have no postings! Enter your thoughts above and submit");
         }
         tvName.setText(restaurant.getName());
         tvUrl.setText(restaurant.getDescription());
