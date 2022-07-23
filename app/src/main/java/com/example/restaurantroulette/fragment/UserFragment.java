@@ -33,6 +33,7 @@ import com.example.restaurantroulette.Restaurant;
 import com.example.restaurantroulette.User;
 import com.parse.FindCallback;
 import com.parse.GetCallback;
+import com.parse.LogOutCallback;
 import com.parse.Parse;
 import com.parse.ParseException;
 import com.parse.ParseFile;
@@ -71,7 +72,7 @@ public class UserFragment extends BaseFragment implements View.OnClickListener{
         rvProfile = (RecyclerView) view.findViewById(R.id.rvProfile);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         rvProfile.setLayoutManager(layoutManager);
-
+        btLogout = view.findViewById(R.id.btLogout);
         rvProfile.setAdapter(adapter);
         swipeContainer = (SwipeRefreshLayout) view.findViewById(R.id.swipeContainerFeed);
         swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -116,16 +117,27 @@ public class UserFragment extends BaseFragment implements View.OnClickListener{
             }
         });
         //TODO: fix this, previous code crashed app
-//        btLogout.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                ParseUser currentUser =ParseUser.getCurrentUser();
-//                currentUser.logOut();
-//                Intent i = new Intent(getContext(), LoginActivity.class);
-//                startActivity(i);
-//            }
-//        });
+        btLogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                logoutUser();  
+            }
+        });
     }
+    private void logoutUser() {
+        ParseUser.logOutInBackground(new LogOutCallback() {
+            @Override
+            public void done(ParseException e) {
+                if(e != null){
+                    Log.e(TAG, "Issue with logout");
+                }else{
+                    Intent i = new Intent(getContext(), LoginActivity.class);
+                    startActivity(i);
+                }
+            }
+        });
+    }
+
     protected void queryRestaurants() {
         ParseQuery<Restaurant> restaurantParseQuery = ParseQuery.getQuery(Restaurant.class);
         restaurantParseQuery.include(Restaurant.KEY_USER);

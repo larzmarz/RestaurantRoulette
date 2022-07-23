@@ -263,7 +263,13 @@ public class SearchPageActivity extends AppCompatActivity implements AdapterView
         });
         btRandomize.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {sortingThruSelected();}
+            public void onClick(View v) {
+                if (ratingSelected == null || priceSelected == null) {
+                    Toast.makeText(SearchPageActivity.this, "Please enter price and rating preferences", Toast.LENGTH_SHORT).show();
+                } else {
+                    sortingThruSelected();
+                }
+            }
         });
     }
     private void sortingThruSelected(){

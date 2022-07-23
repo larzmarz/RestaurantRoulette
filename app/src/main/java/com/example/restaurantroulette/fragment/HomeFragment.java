@@ -42,8 +42,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
         btStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO: Set limits on zip codes so they don't exceed 5 digits, note: some zipcodes start with two zeros
-                if (etZipCode.getText().toString().isEmpty() || etMileRadius.getText().toString().isEmpty()){
+                if (Integer.parseInt(etMileRadius.getText().toString()) > 25 || Integer.parseInt(etMileRadius.getText().toString()) < 0){
+                    Toast.makeText(getContext(), "Radius must be 0-25", Toast.LENGTH_SHORT).show();
+                }else if (etZipCode.getText().toString().isEmpty() || etMileRadius.getText().toString().isEmpty()){
                     Toast.makeText(getContext(), "Enter your Zip Code and Mile Radius", Toast.LENGTH_SHORT).show();
                 }else{
                     // this zip code is what will go into the yelp location section
