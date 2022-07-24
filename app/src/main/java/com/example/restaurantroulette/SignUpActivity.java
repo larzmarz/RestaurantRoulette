@@ -15,7 +15,6 @@ import com.parse.ParseUser;
 import com.parse.SignUpCallback;
 
 public class SignUpActivity extends AppCompatActivity {
-    ParseUser user = new ParseUser();
     public static final String TAG = "SignupActivity";
     public EditText etUsernameSU;
     public EditText etPasswordSU;
@@ -37,10 +36,10 @@ public class SignUpActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //if all the fields are filled out
-                if(!etUsernameSU.getText().toString().isEmpty() && !etPasswordSU.getText().toString().isEmpty() && !etFullNameSU.getText().toString().isEmpty() && !etPwdRetypeSU.getText().toString().isEmpty()){
+                if (!etUsernameSU.getText().toString().isEmpty() && !etPasswordSU.getText().toString().isEmpty() && !etFullNameSU.getText().toString().isEmpty() && !etPwdRetypeSU.getText().toString().isEmpty()){
                     //if the passwords match
-                    if(etPasswordSU.getText().toString().equals(etPwdRetypeSU.getText().toString())){
-                        ParseUser user = new ParseUser();
+                    if (etPasswordSU.getText().toString().equals(etPwdRetypeSU.getText().toString())){
+                        User user = new User();
                         user.setUsername(etUsernameSU.getText().toString());
                         user.setPassword(etPasswordSU.getText().toString());
                         //TODO: save the full names to the backend
@@ -50,17 +49,17 @@ public class SignUpActivity extends AppCompatActivity {
                                 if (e == null) {
                                     Toast.makeText(SignUpActivity.this, "SignupSuccessful!", Toast.LENGTH_SHORT).show();
                                     goMainActivity();
-                                } else {
+                                }else {
                                     Toast.makeText(SignUpActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                                 }
                             }
                         });
                     //if the passwords don't match
-                    }else{
+                    }else {
                         Toast.makeText(SignUpActivity.this, "Passwords do not match!", Toast.LENGTH_SHORT).show();
                     }
                 //if any field is empty
-                }else{
+                }else {
                     Toast.makeText(SignUpActivity.this, "Fill out all fields", Toast.LENGTH_SHORT).show();
                 }
             }

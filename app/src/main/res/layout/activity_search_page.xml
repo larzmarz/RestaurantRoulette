@@ -1,81 +1,105 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/tempbackgroundsearch"
+    android:background="@color/black"
     tools:context=".SearchPageActivity">
 
-    <TextView
-        android:id="@+id/tvTypeFood"
-        android:layout_width="145dp"
-        android:layout_height="35dp"
-        android:layout_marginBottom="4dp"
-        android:text="Type of food:"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/spTypeFood"
-        app:layout_constraintStart_toStartOf="@+id/spTypeFood" />
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/til_price"
+        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
+        android:layout_width="378dp"
+        android:layout_height="47dp"
+        android:layout_marginTop="21dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.461"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/til_rating"
+        app:startIconDrawable="@drawable/ic_baseline_attach_money_24"
+        tools:ignore="MissingConstraints">
+
+        <AutoCompleteTextView
+            android:id="@+id/act_price"
+            android:layout_width="379dp"
+            android:layout_height="54dp"
+            android:background="#C6BABA"
+            android:hint="Max Price"
+            android:inputType="none"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/til_rating"
+        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
+        android:layout_width="0dp"
+        android:layout_height="52dp"
+        android:layout_marginStart="11dp"
+        android:layout_marginTop="190dp"
+        android:layout_marginEnd="13dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:startIconDrawable="@drawable/ic_baseline_attach_money_24"
+        tools:ignore="MissingConstraints">
+
+        <AutoCompleteTextView
+            android:id="@+id/act_rating"
+            android:layout_width="match_parent"
+            android:layout_height="54dp"
+            android:background="#C6BABA"
+            android:hint="Min Rating"
+            android:inputType="none"/>
+    </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
-        android:id="@+id/tvPriceRange"
-        android:layout_width="145dp"
-        android:layout_height="35dp"
-        android:layout_marginTop="48dp"
-        android:text="Price Range:"
-        android:textSize="24sp"
-        app:layout_constraintStart_toStartOf="@+id/spPriceRange"
-        app:layout_constraintTop_toBottomOf="@+id/spTypeFood" />
-
-    <TextView
-        android:id="@+id/tvPriceRange2"
-        android:layout_width="145dp"
-        android:layout_height="35dp"
+        android:id="@+id/tvFoodAliases"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
-        android:layout_marginTop="48dp"
-        android:text="Mile Radius:"
-        android:textSize="24sp"
-        app:layout_constraintStart_toStartOf="@+id/tvPriceRange"
-        app:layout_constraintTop_toBottomOf="@+id/spPriceRange" />
-
-    <Spinner
-        android:id="@+id/spTypeFood"
-        android:layout_width="361dp"
-        android:layout_height="34dp"
-        android:layout_marginTop="164dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.68"
+        android:background="@android:drawable/editbox_background"
+        android:drawableRight="@android:drawable/arrow_down_float"
+        android:drawablePadding="16dp"
+        android:hint="Select Food Types"
+        android:padding="12dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/til_price"
+        app:layout_constraintVertical_bias="0.105" />
 
-    <Spinner
-        android:id="@+id/spPriceRange"
-        android:layout_width="361dp"
-        android:layout_height="34dp"
-        android:layout_marginTop="4dp"
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btSurpriseMe"
+        android:layout_width="171dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="120dp"
+        android:text="Surprise me"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.68"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvPriceRange" />
-
-    <Spinner
-        android:id="@+id/spMileRadius"
-        android:layout_width="361dp"
-        android:layout_height="34dp"
-        android:layout_marginTop="4dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.76"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvPriceRange2" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btRandomize"
         android:layout_width="171dp"
         android:layout_height="50dp"
-        android:layout_marginBottom="148dp"
+        android:layout_marginBottom="208dp"
         android:text="randomize"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/spMileRadius"
-        app:layout_constraintHorizontal_bias="0.431"
-        app:layout_constraintStart_toStartOf="@+id/spMileRadius" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ProgressBar
+        android:id="@+id/pbLoading"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="1dp"
+        android:layout_marginBottom="9dp"
+        app:layout_constraintBottom_toTopOf="@+id/tvFoodAliases"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/til_price" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

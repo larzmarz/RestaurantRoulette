@@ -13,40 +13,39 @@ import com.example.restaurantroulette.fragment.HistoryFragment;
 import com.example.restaurantroulette.fragment.HomeFragment;
 import com.example.restaurantroulette.fragment.UserFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.parse.Parse;
+import com.parse.ParseUser;
 
 public class MainActivity extends AppCompatActivity {
-    //variables used in this activity
+    // variables used in this activity
     final FragmentManager fragmentManager = getSupportFragmentManager();
     private BottomNavigationView bottomNavigationView;
     HistoryFragment historyfragment = new HistoryFragment();
     HomeFragment homeFragment = new HomeFragment();
-    UserFragment userFragment = new UserFragment();
+    UserFragment userFragment = new UserFragment(ParseUser.getCurrentUser());
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        //attaching variables to their respective views
+        // attaching variables to their respective views
         bottomNavigationView = findViewById(R.id.bottom_navigation);
-        //setting click listeners
+        // setting click listeners
         bottomNavigationView.setOnNavigationItemSelectedListener( new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 Fragment fragment;
                 switch (item.getItemId()) {
-                    //assigns fragments to their respective xmls
-                    //home fragment
+                    // assigns fragments to their respective xmls
+                    // home fragment
                     case R.id.action_home:
-                        Toast.makeText(MainActivity.this, "Home screen button works!", Toast.LENGTH_SHORT).show();
                         fragment = homeFragment;
                         break;
-                    //user fragment
+                    // user fragment
                     case R.id.action_user:
-                        Toast.makeText(MainActivity.this, "User button works!", Toast.LENGTH_SHORT).show();
                         fragment = userFragment;
                         break;
-                    //history fragment
+                    // history fragment
                     case R.id.action_history:
-                        Toast.makeText(MainActivity.this, "History screen button works!", Toast.LENGTH_SHORT).show();
                     default:
                         fragment =historyfragment;
                          break;
